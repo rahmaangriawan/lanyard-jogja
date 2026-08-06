@@ -4,7 +4,7 @@
   use App\Support\AssetUrl;
   use App\Support\ResponsiveImage;
 
-  $displayName = $author->name ?: 'Tim Lanyard Bekasi';
+  $displayName = $author->name ?: 'Tim Lanyard Jogja';
   $bioText = $author->bio;
   $avatar = AssetUrl::relative($author->avatar);
   $avatarSrcset = ResponsiveImage::srcset($avatar);
@@ -13,16 +13,17 @@
   $archiveCssVersion = file_exists($archiveCssPath) ? filemtime($archiveCssPath) : 1;
 @endphp
 
-@section('title', $displayName.' | Penulis Lanyard Bekasi')
-@section('meta_description', 'Lihat artikel yang ditulis oleh '.$displayName.' di blog Lanyard Bekasi tentang desain, produksi, dan penggunaan lanyard custom.')
+@section('title', $displayName.' | Penulis Lanyard Jogja')
+@section('meta_description', 'Lihat artikel yang ditulis oleh '.$displayName.' di blog Lanyard Jogja tentang desain, produksi, dan penggunaan lanyard custom.')
 @section('seo_canonical', route('blog.author', ['slug' => $authorSlug]))
-@section('seo_og_image', $author->avatar ?: '/uploads/lanyard-bekasi-logo.webp')
+@section('seo_og_image', $author->avatar ?: '/uploads/lanyard-jogja-logo.webp')
 @if($posts->currentPage() > 1)
   @section('seo_noindex', '1')
 @endif
 
 @push('head')
   <link rel="stylesheet" href="/css/blog-archive.css?v={{ $archiveCssVersion }}">
+  <link rel="stylesheet" href="/css/public-info.css?v={{ file_exists(public_path('css/public-info.css')) ? filemtime(public_path('css/public-info.css')) : 1 }}">
 @endpush
 @push('schema')
   @include('components.schema.author')
@@ -53,7 +54,7 @@
 
       <div class="blog-author-portrait" aria-label="Foto {{ $displayName }}">
         @if($avatar)
-          <img src="{{ $avatar }}" @if($avatarSrcset) srcset="{{ $avatarSrcset }}" sizes="(min-width: 768px) 240px, 180px" @endif alt="{{ $displayName }}, penulis Lanyard Bekasi" width="560" height="560" loading="eager" decoding="async">
+          <img src="{{ $avatar }}" @if($avatarSrcset) srcset="{{ $avatarSrcset }}" sizes="(min-width: 768px) 240px, 180px" @endif alt="{{ $displayName }}, penulis Lanyard Jogja" width="560" height="560" loading="eager" decoding="async">
         @else
           <span aria-hidden="true">{{ strtoupper(mb_substr($displayName, 0, 1)) }}</span>
         @endif

@@ -1,113 +1,58 @@
 @extends('layouts.public')
 
-@section('title', 'Area Pengiriman Lanyard Custom ke Seluruh Indonesia')
-@section('meta_description', 'Lanyard Bekasi melayani pengiriman lanyard custom ke seluruh Indonesia dengan cakupan utama Jakarta, Bogor, Depok, Tangerang, dan Bekasi.')
-@section('seo_og_image', '/uploads/hero-katalog-lanyard-bekasi.webp')
+@section('title', 'Area Layanan Lanyard Jogja')
+@section('meta_description', 'Lanyard Jogja melayani kebutuhan lanyard custom di Kota Jogja, Sleman, Bantul, Kulon Progo, Gunungkidul, dan pengiriman ke seluruh Indonesia.')
+@section('seo_og_image', '/uploads/area-info-bg.webp')
 
 @push('head')
-  <link rel="stylesheet" href="/css/area-index.css?v={{ file_exists(public_path('css/area-index.css')) ? filemtime(public_path('css/area-index.css')) : 1 }}">
+  <link rel="stylesheet" href="/css/support-pages.css?v={{ file_exists(public_path('css/support-pages.css')) ? filemtime(public_path('css/support-pages.css')) : 1 }}">
 @endpush
 
 @section('content')
 @php
-  $primaryAreas = ['Jakarta', 'Bogor', 'Depok', 'Tangerang', 'Bekasi'];
-  $shippingSteps = [
-    ['number' => '01', 'title' => 'Konsultasi kebutuhan', 'description' => 'Sampaikan jumlah, desain, bahan, dan lokasi tujuan kepada admin kami.'],
-    ['number' => '02', 'title' => 'Produksi dan pengecekan', 'description' => 'Pesanan diproduksi sesuai persetujuan lalu diperiksa sebelum dikemas.'],
-    ['number' => '03', 'title' => 'Pengiriman ke lokasi', 'description' => 'Pesanan dikirim melalui ekspedisi menuju alamat yang telah dikonfirmasi.'],
-  ];
-  $shippingWhatsapp = 'https://wa.me/6282210200700?text='.rawurlencode('Halo Lanyard Bekasi, saya mau konsultasi pengiriman lanyard custom.');
+  $primaryAreas = ['Kota Yogyakarta', 'Sleman', 'Bantul', 'Kulon Progo', 'Gunungkidul'];
+  $whatsappUrl = 'https://wa.me/6282210200700?text='.rawurlencode('Halo Lanyard Jogja, saya mau konsultasi lanyard custom untuk area saya.');
 @endphp
-
-<div class="area-index">
-  <section class="area-index__hero" aria-labelledby="area-index-title">
-    <div class="area-index__container area-index__hero-grid">
-      <div class="area-index__intro">
-        <p class="area-index__eyebrow">Area Pengiriman</p>
-        <h1 id="area-index-title">Lanyard Custom, Dikirim ke Seluruh Indonesia</h1>
-        <p>Kami melayani pengiriman nasional dengan cakupan utama Jabodetabek untuk kebutuhan perusahaan, sekolah, komunitas, dan event.</p>
+<div class="support-page area-page">
+  <section class="support-hero support-hero--area" aria-labelledby="area-title">
+    <div class="support-shell support-hero__grid">
+      <div>
+        <p class="support-eyebrow">Area Layanan</p>
+        <h1 id="area-title">Dari Jogja untuk Kebutuhan Lanyard di Seluruh Indonesia</h1>
+        <p class="support-lead">Konsultasi dari mana saja, produksi terarah, lalu pesanan dikirim ke alamat yang telah Anda konfirmasi.</p>
+        <a class="support-button support-button--primary" href="{{ $whatsappUrl }}" target="_blank" rel="noopener noreferrer" data-button-motion><span data-button-label>Konsultasi Area Anda</span></a>
       </div>
-
-      <div class="area-index__map">
-        <iframe
-          src="https://www.google.com/maps?q=Indonesia&amp;z=4&amp;output=embed"
-          title="Peta jangkauan pengiriman Lanyard Bekasi di Indonesia"
-          loading="lazy"
-          allowfullscreen=""
-          referrerpolicy="strict-origin-when-cross-origin"
-        ></iframe>
+      <div class="area-page__coverage-note" aria-label="Cakupan layanan Lanyard Jogja">
+        <svg class="area-page__coverage-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21.6 2.4a1 1 0 0 0-1.05-.23L3.2 8.65a1 1 0 0 0 .06 1.88l7.42 2.64l2.64 7.42a1 1 0 0 0 .94.66h.04a1 1 0 0 0 .92-.73l6.61-17.06a1 1 0 0 0-.23-1.06M14.1 17.3l-1.84-5.18a1 1 0 0 0-.6-.6L6.48 9.68l12.52-4.74z"/></svg>
+        <strong>Berbasis di Jogja</strong><p>Melayani kebutuhan lokal dan pengiriman nasional.</p>
       </div>
     </div>
   </section>
 
-  <section class="area-index__coverage" aria-labelledby="area-coverage-title">
-    <div class="area-index__container">
-      <header class="area-index__section-header">
-        <h2 id="area-coverage-title">Cakupan Utama Jabodetabek</h2>
-        <p>Lima wilayah utama untuk kebutuhan pengiriman lanyard custom dan perlengkapan identitas.</p>
-      </header>
-
-      <div class="area-index__area-grid" role="list" aria-label="Cakupan pengiriman utama Jabodetabek">
+  <section class="area-page__local" aria-labelledby="area-local-title">
+    <div class="support-shell">
+      <header class="support-section-heading"><p class="support-eyebrow">Prioritas Lokal</p><h2 id="area-local-title">Area Utama di Daerah Istimewa Yogyakarta</h2></header>
+      <ol class="area-page__list">
         @foreach($primaryAreas as $area)
-          <article class="area-index__area" role="listitem">
-            <span class="material-symbols-outlined" aria-hidden="true">location_on</span>
-            <div>
-              <h3>{{ $area }}</h3>
-              <p>Area pengiriman utama</p>
-            </div>
-          </article>
+          <li><span>0{{ $loop->iteration }}</span><strong>{{ $area }}</strong><p>Konsultasi dan pengiriman kebutuhan lanyard custom.</p></li>
         @endforeach
-      </div>
-    </div>
-  </section>
-
-  <section class="area-index__process" aria-labelledby="area-process-title">
-    <div class="area-index__container">
-      <header class="area-index__section-header">
-        <h2 id="area-process-title">Alur Pengiriman Pesanan</h2>
-        <p>Proses ringkas dari konsultasi awal hingga pesanan dikirim ke lokasi Anda.</p>
-      </header>
-
-      <div class="area-index__steps" role="list">
-        @foreach($shippingSteps as $step)
-          <article class="area-index__step" role="listitem">
-            <span>{{ $step['number'] }}</span>
-            <h3>{{ $step['title'] }}</h3>
-            <p>{{ $step['description'] }}</p>
-          </article>
-        @endforeach
-      </div>
-
-      <a class="area-index__cta" href="{{ $shippingWhatsapp }}" target="_blank" rel="noopener noreferrer" data-button-motion>
-        <span data-button-label>Konsultasi Pengiriman</span>
-      </a>
+      </ol>
     </div>
   </section>
 
   @if($cityPages->isNotEmpty())
-    <section class="area-index__cities" aria-labelledby="area-cities-title">
-      <div class="area-index__container">
-        <header class="area-index__section-header">
-          <h2 id="area-cities-title">Informasi Layanan per Kota</h2>
-          <p>Pilih kota untuk melihat informasi layanan dan pemesanan yang lebih spesifik.</p>
-        </header>
-
-        <div class="area-index__city-grid" role="list">
+    <section class="area-page__cities" aria-labelledby="area-cities-title">
+      <div class="support-shell">
+        <header class="support-section-heading"><p class="support-eyebrow">Informasi Per Kota</p><h2 id="area-cities-title">Temukan Layanan yang Lebih Spesifik</h2></header>
+        <div class="area-page__cities-grid">
           @foreach($cityPages as $cityPage)
-            <a href="{{ route('area.show', $cityPage->slug) }}" role="listitem">
-              <span>{{ $cityPage->title }}</span>
-              <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
-            </a>
+            <a href="{{ route('area.show', $cityPage->slug) }}"><span>{{ $cityPage->title }}</span><span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a>
           @endforeach
         </div>
       </div>
     </section>
   @endif
 </div>
-
 @include('components.footer')
-
-@push('schema')
-  @include('components.schema.area')
-@endpush
+@push('schema')@include('components.schema.area')@endpush
 @endsection

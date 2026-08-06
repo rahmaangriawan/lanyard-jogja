@@ -1,14 +1,14 @@
 @extends('layouts.public')
 
 @php
-  $description = 'Kumpulan artikel dengan tag '.strtolower($tagName).' di Lanyard Bekasi untuk membantu Anda memahami lanyard custom.';
-  $ogImage = $posts->first()?->featuredImage ?: '/uploads/lanyard-bekasi-logo.webp';
+  $description = 'Kumpulan artikel dengan tag '.strtolower($tagName).' di Lanyard Jogja untuk membantu Anda memahami lanyard custom.';
+  $ogImage = $posts->first()?->featuredImage ?: '/uploads/lanyard-jogja-logo.webp';
   $archiveCssPath = public_path('css/blog-archive.css');
   $archiveCssVersion = file_exists($archiveCssPath) ? filemtime($archiveCssPath) : 1;
   $tagSlug = request()->route('slug');
 @endphp
 
-@section('title', 'Tag: '.$tagName.' | Blog Lanyard Bekasi')
+@section('title', 'Tag: '.$tagName.' | Blog Lanyard Jogja')
 @section('meta_description', $description)
 @section('seo_canonical', route('blog.tag', ['slug' => $tagSlug]))
 @section('seo_type', 'website')
@@ -19,10 +19,11 @@
 
 @push('head')
   <link rel="stylesheet" href="/css/blog-archive.css?v={{ $archiveCssVersion }}">
+  <link rel="stylesheet" href="/css/public-info.css?v={{ file_exists(public_path('css/public-info.css')) ? filemtime(public_path('css/public-info.css')) : 1 }}">
 @endpush
 @push('schema')
   <x-schema.blog-archive
-    :name="'Tag '.$tagName.' | Blog Lanyard Bekasi'"
+    :name="'Tag '.$tagName.' | Blog Lanyard Jogja'"
     :description="$description"
     :canonical-path="'/tag/'.$tagSlug"
     :breadcrumb-name="'#'.$tagName"

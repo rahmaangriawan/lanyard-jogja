@@ -1,30 +1,24 @@
 @extends('layouts.public')
 
-@section('title', 'Pengiriman Lanyard Custom Aman ke Seluruh Indonesia | Lanyard Bekasi')
-@section('meta_description', 'Informasi pengiriman Lanyard Bekasi: gratis ongkir Jabodetabek, packing aman, nomor resi, estimasi nasional, dan bantuan klaim asuransi.')
+@section('title', 'Pengiriman Lanyard Custom Aman ke Seluruh Indonesia | Lanyard Jogja')
+@section('meta_description', 'Informasi pengiriman Lanyard Jogja: packing aman, nomor resi, estimasi nasional, dan bantuan klaim asuransi.')
 @section('seo_canonical', rtrim(config('app.url', url('/')), '/') . '/pengiriman')
-@section('seo_og_image', '/uploads/lanyard-bekasi-cta.webp')
+@section('seo_og_image', '/uploads/lanyard-cta.webp')
 
 @push('head')
   <link rel="stylesheet" href="/css/shipping-index.css?v={{ file_exists(public_path('css/shipping-index.css')) ? filemtime(public_path('css/shipping-index.css')) : 1 }}">
+  <link rel="stylesheet" href="/css/public-info.css?v={{ file_exists(public_path('css/public-info.css')) ? filemtime(public_path('css/public-info.css')) : 1 }}">
 @endpush
 
 @section('content')
 @php
-  $whatsappUrl = 'https://wa.me/6282210200700?text='.rawurlencode('Halo Lanyard Bekasi, saya mau konsultasi pengiriman lanyard custom.');
-
-  $shippingTrust = [
-    ['icon' => 'local_shipping', 'title' => 'Gratis Ongkir', 'description' => 'Area Jabodetabek'],
-    ['icon' => 'inventory_2', 'title' => 'Packing Aman', 'description' => 'Diperiksa sebelum dikirim'],
-    ['icon' => 'track_changes', 'title' => 'Nomor Resi', 'description' => 'Status mudah dipantau'],
-    ['icon' => 'verified_user', 'title' => 'Bantuan Klaim', 'description' => 'Pendampingan bila dibutuhkan'],
-  ];
+  $whatsappUrl = 'https://wa.me/6282210200700?text='.rawurlencode('Halo Lanyard Jogja, saya mau konsultasi pengiriman lanyard custom.');
 
   $shippingServices = [
     [
       'icon' => 'local_shipping',
       'title' => 'Jabodetabek',
-      'description' => 'Gratis ongkir untuk pengiriman reguler ke Jakarta, Bogor, Depok, Tangerang, dan Bekasi sesuai ketentuan promo aktif.',
+      'description' => 'Pengiriman lanyard custom dari Jogja ke seluruh Indonesia dengan packing aman dan bantuan pelacakan resi.',
       'points' => ['Estimasi 1 sampai 2 hari kerja', 'Opsi prioritas berdasarkan konfirmasi tim', 'Cocok untuk kebutuhan kantor dan event'],
     ],
     [
@@ -74,31 +68,15 @@
       <div class="shipping-hero__visual">
         <div class="shipping-hero__image-frame">
           <img
-            src="/uploads/lanyard-bekasi-cta.webp"
-            alt="Contoh lanyard custom Lanyard Bekasi yang siap dikirim"
-            width="941"
-            height="1672"
+            src="/uploads/hero-pengiriman-lanyard.webp"
+            alt="Contoh lanyard custom Lanyard Jogja yang siap dikirim"
+            width="1672"
+            height="941"
             decoding="async"
             fetchpriority="high"
           >
         </div>
       </div>
-    </div>
-  </section>
-
-  <section class="shipping-trust" aria-label="Kepastian layanan pengiriman">
-    <div class="shipping-shell">
-      <ul class="shipping-trust__list">
-        @foreach($shippingTrust as $item)
-          <li>
-            <span class="shipping-trust__icon material-symbols-outlined" aria-hidden="true">{{ $item['icon'] }}</span>
-            <span>
-              <strong>{{ $item['title'] }}</strong>
-              <small>{{ $item['description'] }}</small>
-            </span>
-          </li>
-        @endforeach
-      </ul>
     </div>
   </section>
 
@@ -162,7 +140,7 @@
 
       <div class="shipping-estimates__table-wrap">
         <table>
-          <caption class="sr-only">Estimasi waktu dan biaya pengiriman Lanyard Bekasi</caption>
+          <caption class="sr-only">Estimasi waktu dan biaya pengiriman Lanyard Jogja</caption>
           <thead>
             <tr>
               <th scope="col">Wilayah</th>

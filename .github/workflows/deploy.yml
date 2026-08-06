@@ -1,4 +1,4 @@
-name: Deploy Lanyard Bekasi
+name: Deploy Lanyard Jogja
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: production-deploy
+  group: lanyard-jogja-production-deploy
   cancel-in-progress: false
 
 permissions:
@@ -15,9 +15,9 @@ permissions:
 
 env:
   PHP_VERSION: "8.3"
-  DEPLOY_PATH: ${{ vars.DEPLOY_PATH || '/home/lanyardbekasi/htdocs/lanyardbekasi.com' }}
+  DEPLOY_PATH: ${{ vars.DEPLOY_PATH || '/home/lanyardjogja/htdocs/lanyardjogja.com' }}
   PHP_BIN: ${{ vars.PHP_BIN || '/usr/bin/php8.3' }}
-  HEALTHCHECK_URL: ${{ vars.HEALTHCHECK_URL || 'https://lanyardbekasi.com/' }}
+  HEALTHCHECK_URL: ${{ vars.HEALTHCHECK_URL || 'https://lanyardjogja.com/' }}
 
 jobs:
   test-and-build:
@@ -79,7 +79,6 @@ jobs:
             --exclude '.github/' \
             --exclude '.env' \
             --exclude '.env.*' \
-            --exclude '*.sql' \
             --exclude 'deploy-package/' \
             --exclude 'deploy.tar.gz' \
             --exclude 'node_modules/' \
@@ -90,6 +89,7 @@ jobs:
             --exclude 'storage/framework/sessions/*' \
             --exclude 'storage/framework/views/*' \
             --exclude 'tests/' \
+            --exclude 'database/*.sql' \
             --exclude '.phpunit.result.cache'
 
           tar -czf deploy.tar.gz -C deploy-package .
@@ -97,7 +97,7 @@ jobs:
       - name: Upload deploy artifact
         uses: actions/upload-artifact@v4
         with:
-          name: production-package
+          name: lanyard-jogja-production-package
           path: deploy.tar.gz
           if-no-files-found: error
           retention-days: 3
@@ -113,7 +113,7 @@ jobs:
       - name: Download deploy artifact
         uses: actions/download-artifact@v4
         with:
-          name: production-package
+          name: lanyard-jogja-production-package
 
       - name: Install SSH tooling
         run: sudo apt-get update && sudo apt-get install -y sshpass
@@ -137,7 +137,7 @@ jobs:
             -o ConnectTimeout=15 \
             -P "$SSH_PORT" \
             deploy.tar.gz \
-            "$SSH_USER@$SSH_HOST:deploy-lanyard-bekasi.tar.gz"
+            "$SSH_USER@$SSH_HOST:deploy-lanyard-jogja.tar.gz"
 
       - name: Install release
         env:
@@ -159,8 +159,8 @@ jobs:
 
           APP_DIR="$1"
           PHP_BIN="$2"
-          ARCHIVE="$HOME/deploy-lanyard-bekasi.tar.gz"
-          STAGING_DIR="$HOME/.deploy-lanyard-bekasi-${GITHUB_RUN_ID:-manual}-$$"
+          ARCHIVE="$HOME/deploy-lanyard-jogja.tar.gz"
+          STAGING_DIR="$HOME/.deploy-lanyard-jogja-${GITHUB_RUN_ID:-manual}-$$"
           MAINTENANCE_ACTIVE=0
 
           cleanup() {
@@ -180,10 +180,10 @@ jobs:
           test -f "$STAGING_DIR/artisan"
           test -f "$STAGING_DIR/vendor/autoload.php"
           test -f "$STAGING_DIR/public/index.php"
-          test -d "$STAGING_DIR/public/build"
+          test -f "$STAGING_DIR/public/build/manifest.json"
 
           if [ ! -f "$APP_DIR/.env" ]; then
-            echo "ERROR: $APP_DIR/.env belum tersedia. Buat dari .env.example sebelum deploy." >&2
+            echo "ERROR: $APP_DIR/.env belum tersedia. Buat dari CloudPanel sebelum deploy." >&2
             exit 1
           fi
 
@@ -191,7 +191,8 @@ jobs:
           "$PHP_BIN" artisan down --retry=10 --refresh=15 || true
           MAINTENANCE_ACTIVE=1
 
-          # Application code is replaced while runtime data and CMS uploads remain.
+          # Replace tracked application code while preserving production runtime
+          # data and CMS-managed uploads.
           rsync -r --checksum --delete \
             --no-times --no-perms --no-owner --no-group --omit-dir-times \
             --exclude '.env' \
@@ -200,7 +201,8 @@ jobs:
             --exclude 'public/uploads/' \
             "$STAGING_DIR/" "$APP_DIR/"
 
-          # Repository-owned seed images are copied without deleting CMS uploads.
+          # Repository assets may be updated, but CMS files already stored on
+          # production are never deleted by the deploy.
           if [ -d "$STAGING_DIR/public/uploads" ]; then
             mkdir -p "$APP_DIR/public/uploads"
             rsync -r --checksum \
@@ -225,9 +227,8 @@ jobs:
             storage/logs \
             bootstrap/cache
 
-          # Old runtime files may have been created by a different deploy or
-          # PHP-FPM user. Rotate only disposable runtime directories so the
-          # current site user can recreate them without requiring root access.
+          # Runtime caches may have been created by an earlier deploy user.
+          # Rotate only disposable directories if ownership blocks Laravel.
           CURRENT_UID="$(id -u)"
           reset_foreign_runtime_directory() {
             target="$1"
@@ -250,13 +251,17 @@ jobs:
 
           if ! ENV_FILE="$APP_DIR/.env" "$PHP_BIN" -r '
             $contents = file_get_contents(getenv("ENV_FILE"));
+
             if (! preg_match("/^APP_KEY=(.*)$/m", $contents, $matches)) {
                 exit(1);
             }
+
             $key = trim(trim($matches[1]), "\"\x27");
+
             if (str_starts_with($key, "base64:")) {
                 $key = base64_decode(substr($key, 7), true);
             }
+
             exit(is_string($key) && strlen($key) === 32 ? 0 : 1);
           '; then
             echo "APP_KEY belum valid; membuat application key production."
@@ -267,8 +272,10 @@ jobs:
           "$PHP_BIN" artisan storage:link --force
           "$PHP_BIN" artisan optimize
 
+          # If deploy runs as root, make Laravel writable paths belong to the
+          # CloudPanel site user derived from the expected htdocs path.
           SITE_USER="$(basename "$(dirname "$(dirname "$APP_DIR")")")"
-          if [ "$CURRENT_UID" -eq 0 ] && id "$SITE_USER" >/dev/null 2>&1; then
+          if [ "$(id -u)" -eq 0 ] && id "$SITE_USER" >/dev/null 2>&1; then
             chown -R "$SITE_USER:$SITE_USER" storage bootstrap/cache
           fi
           chmod 775 \
@@ -283,12 +290,9 @@ jobs:
             storage/logs \
             bootstrap/cache
 
-          test -f public/build/manifest.json
-          test -f public/images/logo.webp
-
           "$PHP_BIN" artisan up
           MAINTENANCE_ACTIVE=0
-          echo "Deploy Lanyard Bekasi selesai: $(date --iso-8601=seconds)"
+          echo "Deploy Lanyard Jogja selesai: $(date --iso-8601=seconds)"
           REMOTE_SCRIPT
 
       - name: Verify production

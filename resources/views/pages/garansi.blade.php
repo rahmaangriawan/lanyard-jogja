@@ -1,24 +1,18 @@
 @extends('layouts.public')
 
-@section('title', 'Garansi Kualitas Lanyard Custom | Lanyard Bekasi')
-@section('meta_description', 'Informasi garansi kualitas Lanyard Bekasi, cakupan cacat produksi, batas klaim 3x24 jam, bukti foto atau video, validasi, dan bantuan tim.')
+@section('title', 'Garansi Kualitas Lanyard Custom | Lanyard Jogja')
+@section('meta_description', 'Informasi garansi kualitas Lanyard Jogja, cakupan cacat produksi, batas klaim 3x24 jam, bukti foto atau video, validasi, dan bantuan tim.')
 @section('seo_canonical', rtrim(config('app.url', url('/')), '/') . '/garansi')
-@section('seo_og_image', '/uploads/hero-garansi-lanyard-bekasi.webp')
+@section('seo_og_image', '/uploads/hero-garansi-lanyard.webp')
 
 @push('head')
   <link rel="stylesheet" href="/css/service-pages.css?v={{ file_exists(public_path('css/service-pages.css')) ? filemtime(public_path('css/service-pages.css')) : 1 }}">
+  <link rel="stylesheet" href="/css/public-info.css?v={{ file_exists(public_path('css/public-info.css')) ? filemtime(public_path('css/public-info.css')) : 1 }}">
 @endpush
 
 @section('content')
 @php
-  $claimWhatsappUrl = 'https://wa.me/6282210200700?text='.rawurlencode('Halo Lanyard Bekasi, saya ingin mengajukan klaim garansi untuk pesanan lanyard.');
-
-  $warrantyTrust = [
-    ['icon' => 'verified', 'title' => 'QC Sebelum Kirim', 'description' => 'Produk diperiksa lebih dahulu'],
-    ['icon' => 'schedule', 'title' => 'Maksimal 3x24 Jam', 'description' => 'Sejak paket diterima'],
-    ['icon' => 'photo_library', 'title' => 'Bukti Foto atau Video', 'description' => 'Termasuk dokumentasi unboxing'],
-    ['icon' => 'policy', 'title' => 'Validasi oleh Tim', 'description' => 'Ditinjau berdasarkan bukti'],
-  ];
+  $claimWhatsappUrl = 'https://wa.me/6282210200700?text='.rawurlencode('Halo Lanyard Jogja, saya ingin mengajukan klaim garansi untuk pesanan lanyard.');
 
   $coveredItems = [
     'Hasil cetak pudar ekstrem yang terbukti berasal dari proses produksi.',
@@ -73,7 +67,7 @@
       <div class="info-hero__visual info-hero__visual--landscape">
         <div class="info-hero__image-frame">
           <img
-            src="/uploads/hero-garansi-lanyard-bekasi.webp"
+            src="/uploads/hero-garansi-lanyard.webp"
             alt="Contoh hasil produksi lanyard yang melalui quality control"
             width="1448"
             height="1086"
@@ -82,19 +76,6 @@
           >
         </div>
       </div>
-    </div>
-  </section>
-
-  <section class="info-trust" aria-label="Ketentuan utama garansi">
-    <div class="info-shell">
-      <ul class="info-trust__list">
-        @foreach($warrantyTrust as $item)
-          <li>
-            <span class="info-icon material-symbols-outlined" aria-hidden="true">{{ $item['icon'] }}</span>
-            <span><strong>{{ $item['title'] }}</strong><small>{{ $item['description'] }}</small></span>
-          </li>
-        @endforeach
-      </ul>
     </div>
   </section>
 

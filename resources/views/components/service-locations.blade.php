@@ -1,5 +1,5 @@
 @php
-  $serviceAreas = ['Jakarta', 'Bogor', 'Depok', 'Tangerang', 'Bekasi'];
+  $serviceAreas = ['Yogyakarta', 'Sleman', 'Bantul', 'Kulon Progo', 'Gunungkidul'];
 @endphp
 
 <section class="home-locations" id="locations" aria-labelledby="home-locations-title">
@@ -12,7 +12,7 @@
     <div class="home-locations__map">
       <iframe
         src="https://www.google.com/maps?q=Indonesia&amp;z=4&amp;output=embed"
-        title="Peta jangkauan pengiriman Lanyard Bekasi di Indonesia"
+        title="Peta jangkauan pengiriman Lanyard Jogja di Indonesia"
         loading="lazy"
         allowfullscreen=""
         referrerpolicy="strict-origin-when-cross-origin"

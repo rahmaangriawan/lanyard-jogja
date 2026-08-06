@@ -9,7 +9,7 @@
       $plain = html_entity_decode(strip_tags((string) $value), ENT_QUOTES | ENT_HTML5, 'UTF-8');
       $plain = str_replace(
           ['IndoLanyard', 'Pusat Tali Lanyard', 'PusatTaliLanyard', '—', '–'],
-          ['Lanyard Bekasi', 'Lanyard Bekasi', 'Lanyard Bekasi', '-', '-'],
+          ['Lanyard Jogja', 'Lanyard Jogja', 'Lanyard Jogja', '-', '-'],
           $plain
       );
 
@@ -49,7 +49,7 @@
   $price = $normalizeCopy($product->basePrice) ?: 'Minta quotation';
   $minimumOrder = $normalizeCopy($product->minOrder);
   $description = $normalizeCopy($product->description ?: $product->shortDescription);
-  $description = $description ?: 'Informasi bahan, ukuran, aksesori, dan kebutuhan produksi dapat dikonsultasikan langsung dengan tim Lanyard Bekasi.';
+  $description = $description ?: 'Informasi bahan, ukuran, aksesori, dan kebutuhan produksi dapat dikonsultasikan langsung dengan tim Lanyard Jogja.';
   $descriptionHtml = Str::markdown($description, [
       'html_input' => 'strip',
       'allow_unsafe_links' => false,
@@ -61,30 +61,19 @@
   $hasFeaturedImage = filled($product->featuredImage);
   $heroImage = AssetUrl::relative($product->featuredImage, '/uploads/aset-produk.webp');
   $heroSrcset = ResponsiveImage::srcset($heroImage);
-  $heroAlt = $hasFeaturedImage ? 'Foto '.$productName : 'Contoh hasil lanyard custom Lanyard Bekasi';
+  $heroAlt = $hasFeaturedImage ? 'Foto '.$productName : 'Contoh hasil lanyard custom Lanyard Jogja';
 
   $waNumber = \App\Models\Setting::query()->where('key', 'wa_number')->value('value') ?: '6282210200700';
-  $waMessage = rawurlencode('Halo Lanyard Bekasi, saya ingin konsultasi tentang produk '.$productName.'. Mohon bantuannya.');
-  $waLink = "https://wa.me/{$waNumber}?text={$waMessage}";
-
-  $title = filled($product->metaTitle) ? $normalizeCopy($product->metaTitle) : $productName.' | Lanyard Bekasi';
+  $productContext = 'Produk: '.$productName
+      .($sku ? "\nSKU: {$sku}" : '')
+      .($price ? "\nHarga mulai: {$price}" : '')
+      .($minimumOrder ? "\nMinimum pesanan: {$minimumOrder}" : '');
+  $waOrderLink = 'https://wa.me/'.$waNumber.'?text='.rawurlencode("Halo Lanyard Jogja, saya ingin pesan produk berikut.\n\n{$productContext}\n\nJumlah pesanan: \nKebutuhan/desain: ");
+  $title = filled($product->metaTitle) ? $normalizeCopy($product->metaTitle) : $productName.' | Lanyard Jogja';
   $metaDescription = filled($product->metaDescription)
       ? $normalizeCopy($product->metaDescription)
       : Str::limit($shortDescription, 155, '');
 
-  $trustItems = [
-      ['title' => 'Bantuan Desain', 'description' => 'Mockup sebelum produksi'],
-      ['title' => 'Spesifikasi Fleksibel', 'description' => 'Bahan dan aksesori custom'],
-      ['title' => 'Quality Control', 'description' => 'Produk diperiksa sebelum kirim'],
-      ['title' => 'Pengiriman Terpantau', 'description' => 'Nomor resi dibagikan'],
-  ];
-
-  $orderSteps = [
-      ['title' => 'Konsultasi', 'description' => 'Sampaikan jumlah dan kebutuhan Anda.'],
-      ['title' => 'Review desain', 'description' => 'Periksa mockup serta spesifikasi.'],
-      ['title' => 'Konfirmasi', 'description' => 'Setujui quotation sebelum produksi.'],
-      ['title' => 'Produksi & kirim', 'description' => 'Produk diperiksa lalu dikirim.'],
-  ];
 @endphp
 
 @section('title', $title)
@@ -117,6 +106,7 @@
       <div class="product-detail__marketplace">
         <div class="product-detail__gallery">
           <figure class="product-detail__media">
+            <figcaption>{{ $categoryName }}</figcaption>
             <img
               src="{{ $heroImage }}"
               @if($heroSrcset) srcset="{{ $heroSrcset }}" sizes="(max-width: 767px) 100vw, 560px" @endif
@@ -127,26 +117,27 @@
               decoding="async"
             >
           </figure>
-          <div class="product-detail__media-note">
-            <span aria-hidden="true">✓</span>
-            <p>Visual produk mengikuti data yang tersedia. Warna hasil cetak dapat memiliki toleransi produksi.</p>
-          </div>
         </div>
 
-        <article class="product-detail__summary">
-          <div class="product-detail__summary-meta">
-            <span>{{ $categoryName }}</span>
-            @if($sku)<span>SKU {{ $sku }}</span>@endif
-          </div>
+        <aside class="product-detail__purchase" aria-label="Panel pemesanan produk">
+          @if($sku)
+            <div class="product-detail__summary-meta">
+              <span>SKU {{ $sku }}</span>
+            </div>
+          @endif
 
           <h1 id="product-detail-title">{{ $productName }}</h1>
           <p class="product-detail__summary-copy">{{ $shortDescription }}</p>
-
           <div class="product-detail__price">
             <span>Harga mulai</span>
             <strong>{{ $price }}</strong>
             <small>Harga akhir menyesuaikan jumlah dan spesifikasi</small>
           </div>
+
+          <p class="product-detail__order-status">
+            <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false"><path d="m5 12 4.2 4.2L19 6.5"/></svg>
+            Produk custom &mdash; mockup dikonfirmasi sebelum produksi
+          </p>
 
           <dl class="product-detail__quick-info">
             @if($minimumOrder)
@@ -160,8 +151,8 @@
               <dd>Custom sesuai kebutuhan</dd>
             </div>
             <div>
-              <dt>Konfirmasi desain</dt>
-              <dd>Mockup sebelum produksi</dd>
+              <dt>Estimasi produksi</dt>
+              <dd>1&ndash;3 hari kerja</dd>
             </div>
           </dl>
 
@@ -172,45 +163,29 @@
           </ul>
 
           <div class="product-detail__summary-actions">
-            <a class="product-detail__button product-detail__button--primary" href="{{ $waLink }}" target="_blank" rel="noopener">
-              Pesan via WhatsApp
-            </a>
-            <a class="product-detail__button product-detail__button--secondary" href="{{ route('ordering') }}">
-              Cara Pemesanan <span aria-hidden="true">→</span>
+            <a class="product-detail__button product-detail__button--primary" href="{{ $waOrderLink }}" target="_blank" rel="noopener">
+              Pesan Sekarang
             </a>
           </div>
-
-          <p class="product-detail__response-note">Tim kami akan membantu mengecek spesifikasi dan estimasi pesanan Anda.</p>
-        </article>
+        </aside>
       </div>
     </div>
   </section>
 
-  <section class="product-detail__trust" aria-labelledby="product-trust-title">
-    <div class="product-detail__shell">
-      <h2 class="sr-only" id="product-trust-title">Kepastian layanan Lanyard Bekasi</h2>
-      <ul>
-        @foreach($trustItems as $item)
-          <li>
-            <span class="product-detail__trust-check" aria-hidden="true">✓</span>
-            <span>
-              <strong>{{ $item['title'] }}</strong>
-              <small>{{ $item['description'] }}</small>
-            </span>
-          </li>
-        @endforeach
-      </ul>
-    </div>
-  </section>
-
-  <section class="product-detail__dossier" aria-labelledby="product-dossier-title">
+  <section id="informasi-produk" class="product-detail__dossier" aria-labelledby="product-dossier-title">
     <div class="product-detail__shell product-detail__dossier-layout">
       <div class="product-detail__dossier-content">
-        <article id="deskripsi-produk" class="product-detail__description">
-          <span class="product-detail__eyebrow">Informasi Produk</span>
-          <h2 id="product-dossier-title">Deskripsi Produk</h2>
-          <div class="product-detail__description-copy">{!! $descriptionHtml !!}</div>
-        </article>
+        <div class="product-detail__dossier-body">
+          <nav class="product-detail__anchor-nav" aria-label="Navigasi informasi produk">
+            <a href="#deskripsi-produk">Deskripsi</a>
+            @if($specifications)<a href="#spesifikasi-produk">Spesifikasi</a>@endif
+            @if($accessories)<a href="#aksesori-produk">Aksesori</a>@endif
+          </nav>
+          <article id="deskripsi-produk" class="product-detail__description">
+            <span class="product-detail__eyebrow">Informasi Produk</span>
+            <h2 id="product-dossier-title">Deskripsi Produk</h2>
+            <div class="product-detail__description-copy">{!! $descriptionHtml !!}</div>
+          </article>
 
         @if($specifications || $accessories)
           <div class="product-detail__spec-groups">
@@ -237,39 +212,9 @@
             @endif
           </div>
         @endif
+        </div>
       </div>
 
-      <aside class="product-detail__buy-card" aria-label="Konsultasi produk">
-        <span>Butuh produk ini?</span>
-        <strong>{{ $price }}</strong>
-        <p>Kirim jumlah pesanan dan kebutuhan Anda untuk mendapatkan quotation.</p>
-        <a href="{{ $waLink }}" target="_blank" rel="noopener">Konsultasi Sekarang</a>
-        <ul>
-          <li>✓ Respons langsung dari tim</li>
-          <li>✓ Tidak ada pembayaran di halaman ini</li>
-          <li>✓ Spesifikasi dikonfirmasi dahulu</li>
-        </ul>
-      </aside>
-    </div>
-  </section>
-
-  <section id="alur-pemesanan" class="product-detail__process" aria-labelledby="product-process-title">
-    <div class="product-detail__shell">
-      <div class="product-detail__section-heading">
-        <span class="product-detail__eyebrow">Proses Pemesanan</span>
-        <h2 id="product-process-title">Pesan Custom dalam 4 Tahap</h2>
-        <p>Alur ringkas dari konsultasi sampai produk dikirim.</p>
-      </div>
-
-      <ol>
-        @foreach($orderSteps as $index => $step)
-          <li>
-            <span class="product-detail__step-number">{{ $index + 1 }}</span>
-            <h3>{{ $step['title'] }}</h3>
-            <p>{{ $step['description'] }}</p>
-          </li>
-        @endforeach
-      </ol>
     </div>
   </section>
 
@@ -289,7 +234,7 @@
             @php
               $relatedName = $normalizeCopy($relatedProduct->name ?: 'Lanyard Custom');
               $relatedImage = AssetUrl::relative($relatedProduct->featuredImage, '/uploads/aset-produk.webp');
-              $relatedAlt = filled($relatedProduct->featuredImage) ? 'Foto '.$relatedName : 'Contoh hasil lanyard custom Lanyard Bekasi';
+              $relatedAlt = filled($relatedProduct->featuredImage) ? 'Foto '.$relatedName : 'Contoh hasil lanyard custom Lanyard Jogja';
               $relatedPrice = $normalizeCopy($relatedProduct->basePrice) ?: 'Minta quotation';
               $relatedCategory = $normalizeCopy($relatedProduct->category?->name ?: 'Lanyard Custom');
             @endphp
@@ -312,18 +257,6 @@
     </section>
   @endif
 
-  <section class="product-detail__cta" aria-labelledby="product-cta-title">
-    <div class="product-detail__shell">
-      <div class="product-detail__cta-panel">
-        <div>
-          <span>Butuh bantuan memilih?</span>
-          <h2 id="product-cta-title">Konsultasikan Produk Sebelum Memesan</h2>
-          <p>Tim kami membantu menentukan bahan, ukuran, aksesori, dan jumlah yang sesuai.</p>
-        </div>
-        <a href="{{ $waLink }}" target="_blank" rel="noopener">Chat WhatsApp Sekarang →</a>
-      </div>
-    </div>
-  </section>
 </div>
 
 @include('components.footer')

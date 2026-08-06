@@ -21,10 +21,10 @@ final class PublicApi
         foreach (['site_logo', 'site_favicon', 'og_image', 'logo_url', 'favicon_url', 'site_logo_header', 'site_logo_mobile'] as $key) {
             if (array_key_exists($key, $settings)) {
                 $fallback = str_contains($key, 'favicon')
-                    ? '/uploads/lanyard-bekasi-favicon.webp'
+                    ? '/uploads/lanyard-jogja-favicon.webp'
                     : (str_contains($key, 'header')
-                        ? '/uploads/lanyard-bekasi-logo.webp'
-                        : (str_contains($key, 'mobile') ? '/uploads/lanyard-bekasi-logo.webp' : '/uploads/lanyard-bekasi-logo.webp'));
+                        ? '/uploads/lanyard-jogja-logo.webp'
+                        : (str_contains($key, 'mobile') ? '/uploads/lanyard-jogja-logo.webp' : '/uploads/lanyard-jogja-logo.webp'));
                 $settings[$key] = AssetUrl::relative($settings[$key], $fallback) ?? $fallback;
             }
         }
@@ -80,11 +80,11 @@ final class PublicApi
                     'pusattalilanyard',
                 ],
                 [
-                    'www.lanyardbekasi.com',
-                    'lanyardbekasi.com',
-                    'LanyardBekasi',
-                    'Lanyard Bekasi',
-                    'lanyardbekasi',
+                    'www.lanyardjogja.com',
+                    'lanyardjogja.com',
+                    'LanyardJogja',
+                    'Lanyard Jogja',
+                    'lanyardjogja',
                 ],
                 $value,
             )

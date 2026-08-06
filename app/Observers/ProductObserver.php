@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Product;
+use App\Support\HomePageCache;
 use Illuminate\Support\Facades\Cache;
 
 class ProductObserver
@@ -10,8 +11,7 @@ class ProductObserver
     private function clearCache(): void
     {
         $cache = Cache::store(config('cache.public_store', 'file'));
-        $cache->forget('home_products');
-        $cache->forget('home_response_html');
+        HomePageCache::invalidateProducts();
         $cache->forget('public_sitemap_products');
         $cache->put('seo_sitemap_dirty', true, now()->addDays(7));
     }

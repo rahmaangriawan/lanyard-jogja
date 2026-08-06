@@ -1,5 +1,5 @@
 @php
-  $blogWhatsappUrl = 'https://wa.me/6282210200700?text='.rawurlencode('Halo Lanyard Bekasi, saya sudah membaca blog dan ingin konsultasi produk lanyard custom.');
+  $blogWhatsappUrl = 'https://wa.me/6282210200700?text='.rawurlencode('Halo Lanyard Jogja, saya sudah membaca blog dan ingin konsultasi produk lanyard custom.');
 @endphp
 
 <section class="blog-archive-cta" aria-labelledby="blog-archive-cta-title">

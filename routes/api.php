@@ -20,6 +20,7 @@ use App\Support\ArticlePreview;
 use App\Support\AuthorProfile;
 use App\Support\HtmlSanitizer;
 use App\Support\PublicApi;
+use App\Support\PlainText;
 use App\Support\SecureSettings;
 use App\Support\SettingKeyRegistry;
 use App\Support\Turnstile;
@@ -31,7 +32,7 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 
-Route::get('/health', fn () => ['ok' => true, 'app' => 'lanyardbekasi-laravel']);
+Route::get('/health', fn () => ['ok' => true, 'app' => 'lanyardjogja-laravel']);
 
 Route::middleware('throttle:public-api')->group(function () {
     Route::get('/turnstile-config', function () {
@@ -322,6 +323,12 @@ Route::middleware('throttle:public-api')->group(function () {
 });
 
 Route::post('/comments', function (Request $request) {
+    $request->merge([
+        'name' => PlainText::normalize($request->input('name')),
+        'email' => strtolower(trim((string) $request->input('email'))),
+        'content' => PlainText::normalize($request->input('content')),
+    ]);
+
     $data = $request->validate([
         'postId' => [
             'required',
@@ -335,9 +342,9 @@ Route::post('/comments', function (Request $request) {
 
     $comment = Comment::create([
         'postId' => $data['postId'],
-        'name' => trim($data['name']),
-        'email' => strtolower(trim($data['email'])),
-        'content' => trim($data['content']),
+        'name' => $data['name'],
+        'email' => $data['email'],
+        'content' => $data['content'],
         'approved' => false,
     ]);
 
@@ -346,9 +353,16 @@ Route::post('/comments', function (Request $request) {
         'message' => 'Komentar berhasil dikirim dan menunggu persetujuan admin.',
         'comment' => $comment,
     ], 201);
-})->middleware('throttle:5,10');
+})->middleware('throttle:comment-submit');
 
 Route::post('/inquiries', function (Request $request) {
+    $request->merge([
+        'name' => PlainText::normalize($request->input('name')),
+        'email' => strtolower(trim((string) $request->input('email'))),
+        'phone' => PlainText::normalize($request->input('phone')),
+        'message' => PlainText::normalize($request->input('message')),
+    ]);
+
     $data = $request->validate([
         'name' => ['required', 'string', 'min:3', 'max:160'],
         'email' => ['required', 'email', 'max:190'],
@@ -369,22 +383,22 @@ Route::post('/inquiries', function (Request $request) {
     }
 
     $inquiry = Inquiry::create([
-        'name' => trim($data['name']),
-        'email' => strtolower(trim($data['email'])),
-        'phone' => trim($data['phone']),
-        'message' => trim($data['message']),
+        'name' => $data['name'],
+        'email' => $data['email'],
+        'phone' => $data['phone'],
+        'message' => $data['message'],
     ]);
 
     return response()->json(['success' => true, 'inquiry' => $inquiry], 201);
-})->middleware('throttle:3,5');
+})->middleware('throttle:inquiry-submit');
 
 Route::middleware(['auth:sanctum', 'cms', 'throttle:cms-api'])->prefix('cms')->group(function () {
     Route::apiResource('/posts', PostController::class);
-    Route::apiResource('/pages', PageController::class);
     Route::get('/media', fn () => ['success' => true, 'mediaList' => Media::latest('createdAt')->paginate(24)]);
 });
 
 Route::middleware(['auth:sanctum', 'admin', 'throttle:cms-api'])->prefix('cms')->group(function () {
+    Route::apiResource('/pages', PageController::class);
     Route::get('/stats', fn () => [
         'success' => true,
         'stats' => [

@@ -12,9 +12,13 @@ use App\Models\Category;
 use App\Models\CityPage;
 use App\Models\Comment;
 use App\Models\Post;
+use App\Models\Portfolio;
 use App\Models\Product;
+use App\Models\Testimonial;
 use App\Models\User;
+use App\Support\HomePageCache;
 use App\Support\OpenGraphImage;
+use App\Support\PlainText;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
@@ -87,15 +91,14 @@ $statelessPublicMiddleware = [
 ];
 
 Route::get('/', function () {
-    $html = Cache::store(config('cache.public_store', 'file'))
-        ->remember('home_response_html', now()->addMinutes(5), fn () => view('pages.home')->render());
+    $html = HomePageCache::render(fn (): string => view('pages.home')->render());
     $response = response($html);
 
     $response->setEtag(sha1($html));
     $response->setPublic();
     $response->setMaxAge(60);
-    $response->setSharedMaxAge(300);
-    $response->headers->addCacheControlDirective('stale-while-revalidate', 600);
+    $response->setSharedMaxAge(240);
+    $response->headers->addCacheControlDirective('stale-while-revalidate', 60);
     $response->isNotModified(request());
 
     return $response;
@@ -161,6 +164,10 @@ Route::get('/page-sitemap.xml', function () use ($sitemapBaseUrl, $sitemapRespon
         ['loc' => $base.'/garansi', 'changefreq' => 'monthly', 'priority' => '0.7'],
         ['loc' => $base.'/faq', 'changefreq' => 'monthly', 'priority' => '0.7'],
         ['loc' => $base.'/area', 'changefreq' => 'monthly', 'priority' => '0.8'],
+        ['loc' => $base.'/template-desain', 'changefreq' => 'monthly', 'priority' => '0.7'],
+        ['loc' => $base.'/portofolio', 'changefreq' => 'weekly', 'priority' => '0.7'],
+        ['loc' => $base.'/tentang-kami', 'changefreq' => 'monthly', 'priority' => '0.6'],
+        ['loc' => $base.'/testimoni', 'changefreq' => 'monthly', 'priority' => '0.6'],
         ['loc' => $base.'/cara-pemesanan', 'changefreq' => 'monthly', 'priority' => '0.7'],
         ['loc' => $base.'/daftar-harga', 'changefreq' => 'weekly', 'priority' => '0.8'],
         ['loc' => $base.'/promo', 'changefreq' => 'weekly', 'priority' => '0.7'],
@@ -309,6 +316,26 @@ Route::get('/area/{slug}', function (string $slug) {
 
     return view('pages.area.show', compact('cityPage'));
 })->name('area.show');
+Route::view('/template-desain', 'pages.template-desain')->name('design-templates');
+Route::get('/portofolio', function () {
+    $portfolios = Portfolio::query()
+        ->where('published', true)
+        ->orderBy('sortOrder')
+        ->orderByDesc('createdAt')
+        ->get();
+
+    return view('pages.portofolio', compact('portfolios'));
+})->name('portfolio');
+Route::view('/tentang-kami', 'pages.tentang-kami')->name('about');
+Route::get('/testimoni', function () {
+    $testimonials = Testimonial::query()
+        ->where('published', true)
+        ->orderBy('sortOrder')
+        ->orderByDesc('createdAt')
+        ->get();
+
+    return view('pages.testimoni', compact('testimonials'));
+})->name('testimonials');
 Route::view('/cara-pemesanan', 'pages.cara-pemesanan')->name('ordering');
 Route::view('/daftar-harga', 'pages.daftar-harga')->name('pricing');
 Route::view('/promo', 'pages.promo')->name('promo');
@@ -460,6 +487,13 @@ Route::post('/blog/{slug}/comments', function (Request $request, string $slug) {
         ->where('published', true)
         ->where('slug', $slug)
         ->firstOrFail();
+
+    $request->merge([
+        'name' => PlainText::normalize($request->input('name')),
+        'email' => strtolower(trim((string) $request->input('email'))),
+        'content' => PlainText::normalize($request->input('content')),
+    ]);
+
     $data = $request->validate([
         'name' => ['required', 'string', 'max:100'],
         'email' => ['required', 'email', 'max:190'],
@@ -476,7 +510,7 @@ Route::post('/blog/{slug}/comments', function (Request $request, string $slug) {
 
     return redirect('/blog/'.$post->slug.'#comments')
         ->with('comment_sent', 'Komentar berhasil dikirim dan menunggu moderasi.');
-})->middleware('throttle:5,1')->name('blog.comment');
+})->middleware('throttle:comment-submit')->name('blog.comment');
 
 Route::get('/dashboard', function (Request $request) {
     if (! $request->user()) {

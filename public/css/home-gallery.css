@@ -1,4 +1,4 @@
-/* Homepage production gallery. Desktop mosaic, mobile touch slider. */
+﻿/* Homepage production gallery. Desktop mosaic, mobile touch slider. */
 
 .home-gallery,
 .home-gallery *,
@@ -11,7 +11,7 @@
   --gallery-ink: #172033;
   --gallery-muted: #667085;
   --gallery-line: #dfe4ea;
-  --gallery-accent: #117a3a;
+  --gallery-accent: var(--brand-primary);
   overflow: hidden;
   border-bottom: 1px solid var(--gallery-line);
   background: #ffffff;
@@ -179,7 +179,7 @@
 
   .home-gallery__button:not(:disabled):hover {
     border-color: var(--gallery-accent);
-    background: #eaf5ee;
+    background: var(--brand-primary-soft);
     color: var(--gallery-accent);
   }
 

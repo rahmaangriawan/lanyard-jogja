@@ -1,6 +1,6 @@
 @extends('layouts.public')
 
-@section('title', 'Produk Lanyard Custom | Lanyard Bekasi')
+@section('title', 'Produk Lanyard Custom | Lanyard Jogja')
 @section('meta_description', 'Temukan pilihan lanyard custom, ID card holder, dan aksesori yang dapat disesuaikan untuk perusahaan, sekolah, komunitas, dan event.')
 @section('seo_og_image', '/uploads/aset-produk.webp')
 
@@ -19,7 +19,7 @@
 
   $search = trim((string) request('q', ''));
   $page = max(1, (int) request('page', 1));
-  $perPage = 9;
+  $perPage = 8;
   $query = Product::query()->with('category')->where('published', true);
 
   if ($search !== '') {
@@ -53,13 +53,7 @@
 
   $asset = fn ($value) => \App\Support\AssetUrl::relative($value, '/uploads/aset-produk.webp');
   $plain = fn ($value) => trim((string) preg_replace('/\s+/u', ' ', strip_tags((string) $value)));
-  $productWhatsappUrl = 'https://wa.me/6282210200700?text='.rawurlencode('Halo Lanyard Bekasi, saya ingin dibantu memilih produk lanyard custom yang sesuai.');
-  $productTrust = [
-    ['icon' => 'design_services', 'title' => 'Bantuan Desain', 'description' => 'Mockup disiapkan sebelum produksi'],
-    ['icon' => 'palette', 'title' => 'Spesifikasi Fleksibel', 'description' => 'Bahan dan aksesori dapat dipilih'],
-    ['icon' => 'verified', 'title' => 'Quality Control', 'description' => 'Produk diperiksa sebelum dikirim'],
-    ['icon' => 'local_shipping', 'title' => 'Pengiriman Luas', 'description' => 'Pesanan dikirim ke seluruh Indonesia'],
-  ];
+  $productWhatsappUrl = 'https://wa.me/6282210200700?text='.rawurlencode('Halo Lanyard Jogja, saya ingin dibantu memilih produk lanyard custom yang sesuai.');
 @endphp
 
 <div class="product-index">
@@ -83,35 +77,17 @@
           @endif
         </form>
 
-        <ul class="product-index__hero-facts" aria-label="Ringkasan katalog">
-          <li><strong>{{ $total }}+</strong><span>Pilihan produk</span></li>
-          <li><strong>Custom</strong><span>Desain dan spesifikasi</span></li>
-          <li><strong>Terarah</strong><span>Konsultasi sebelum produksi</span></li>
-        </ul>
       </div>
 
       <div class="product-index__hero-visual">
         <div class="product-index__visual-frame">
-          <img src="/uploads/hero-produk-lanyard-bekasi.webp" alt="Profesional memakai lanyard custom Lanyard Bekasi di lingkungan kantor" width="1448" height="1086" decoding="async" fetchpriority="high">
+          <img src="/uploads/hero-produk-lanyard.webp" alt="Profesional memakai lanyard custom Lanyard Jogja di lingkungan kantor" width="1448" height="1086" decoding="async" fetchpriority="high">
         </div>
         <div class="product-index__visual-note">
           <span class="material-symbols-outlined" aria-hidden="true">design_services</span>
           <p><strong>Bingung memilih?</strong><span>Tim kami siap membantu menentukan spesifikasi.</span></p>
         </div>
       </div>
-    </div>
-  </section>
-
-  <section class="product-index__trust" aria-label="Keunggulan katalog Lanyard Bekasi">
-    <div class="product-index__container">
-      <ul class="product-index__trust-list">
-        @foreach($productTrust as $item)
-          <li>
-            <span class="material-symbols-outlined" aria-hidden="true">{{ $item['icon'] }}</span>
-            <span><strong>{{ $item['title'] }}</strong><small>{{ $item['description'] }}</small></span>
-          </li>
-        @endforeach
-      </ul>
     </div>
   </section>
 
@@ -140,7 +116,7 @@
           <a href="{{ route('products.index') }}" data-button-motion><span>Lihat Semua Produk</span></a>
         </div>
       @else
-        <ul class="product-index__grid" aria-label="Daftar produk Lanyard Bekasi">
+        <ul class="product-index__grid" aria-label="Daftar produk Lanyard Jogja">
           @foreach($products as $product)
             @php
               $image = $asset($product->featuredImage ?? null);
@@ -150,7 +126,7 @@
             <li class="product-index__card">
               <a href="{{ route('products.show', ['slug' => $product->slug]) }}" aria-label="Lihat detail {{ $product->name }}">
                 <figure class="product-index__image">
-                  <img src="{{ $image }}" @if($srcset) srcset="{{ $srcset }}" sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw" @endif alt="{{ $product->name }}" width="640" height="640" loading="lazy" decoding="async">
+                  <img src="{{ $image }}" @if($srcset) srcset="{{ $srcset }}" sizes="(max-width: 767px) 100vw, (max-width: 1100px) 50vw, 25vw" @endif alt="{{ $product->name }}" width="640" height="640" loading="lazy" decoding="async">
                 </figure>
                 <div class="product-index__card-body">
                   <div class="product-index__meta">

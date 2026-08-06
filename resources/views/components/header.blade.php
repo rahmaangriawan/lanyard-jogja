@@ -7,7 +7,7 @@
     ['label' => 'Artikel', 'href' => route('blog.index'), 'patterns' => ['blog*', 'kategori/*', 'tag/*']],
   ];
 
-  $quotationUrl = 'https://wa.me/6282210200700?text='.rawurlencode('Halo Lanyard Bekasi, saya mau konsultasi lanyard custom.');
+  $quotationUrl = 'https://wa.me/6282210200700?text='.rawurlencode('Halo Lanyard Jogja, saya mau konsultasi lanyard custom.');
 @endphp
 
 <div class="site-header__sentinel" id="site-header-sentinel" aria-hidden="true"></div>
@@ -15,12 +15,12 @@
 <header class="site-header" id="site-header">
   <div class="site-header__surface">
     <nav class="site-header__nav" aria-label="Navigasi utama">
-      <a href="{{ route('home') }}" class="site-header__logo" aria-label="Lanyard Bekasi, kembali ke beranda">
+      <a href="{{ route('home') }}" class="site-header__logo" aria-label="Lanyard Jogja, kembali ke beranda">
         <img
-          src="/uploads/lanyard-bekasi-logo-160w.webp"
-          srcset="/uploads/lanyard-bekasi-logo-160w.webp 160w, /uploads/lanyard-bekasi-logo-256w.webp 256w, /uploads/lanyard-bekasi-logo.webp 500w"
+          src="/uploads/lanyard-jogja-logo-160w.webp"
+          srcset="/uploads/lanyard-jogja-logo-160w.webp 160w, /uploads/lanyard-jogja-logo-256w.webp 256w, /uploads/lanyard-jogja-logo.webp 500w"
           sizes="126px"
-          alt="Lanyard Bekasi"
+          alt="Lanyard Jogja"
           width="500"
           height="122"
           loading="eager"

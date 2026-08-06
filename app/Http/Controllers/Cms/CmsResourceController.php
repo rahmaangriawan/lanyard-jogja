@@ -15,9 +15,12 @@ use App\Models\Post;
 use App\Models\Product;
 use App\Models\PublicRedirect;
 use App\Models\Setting;
+use App\Models\Testimonial;
 use App\Models\User;
+use App\Rules\SafePublicUrl;
 use App\Support\ArticlePreview;
 use App\Support\HtmlSanitizer;
+use App\Support\HomePageCache;
 use App\Support\MediaThumbnail;
 use App\Support\MediaUpload;
 use App\Support\PublicRedirectUrl;
@@ -72,9 +75,11 @@ class CmsResourceController extends Controller
 
         $search = trim((string) $request->query('q', ''));
         if ($search !== '' && ! empty($config['search'])) {
-            $query->where(function ($query) use ($config, $search) {
+            $escapedSearch = str_replace(['!', '%', '_'], ['!!', '!%', '!_'], $search);
+
+            $query->where(function ($query) use ($config, $escapedSearch) {
                 foreach ($config['search'] as $column) {
-                    $query->orWhere($column, 'like', "%{$search}%");
+                    $query->orWhereRaw("{$column} LIKE ? ESCAPE '!'", ["%{$escapedSearch}%"]);
                 }
             });
         }
@@ -347,15 +352,7 @@ class CmsResourceController extends Controller
 
     private function invalidateHomeCache(string $resource): void
     {
-        $key = match ($resource) {
-            'products' => 'home_products',
-            'posts' => 'home_posts',
-            default => null,
-        };
-
-        if ($key !== null) {
-            Cache::store(config('cache.public_store', 'file'))->forget($key);
-        }
+        HomePageCache::invalidateResource($resource);
     }
 
     private function validated(Request $request, array $config, ?Model $item = null): array
@@ -406,6 +403,10 @@ class CmsResourceController extends Controller
                         fn ($query) => $query->whereIn('role', [User::ROLE_ADMIN, User::ROLE_WRITER])
                     ),
                 ];
+            }
+
+            if (in_array($name, ['featuredImage', 'imageUrl', 'logoUrl', 'avatar', 'link'], true)) {
+                $rule[] = new SafePublicUrl;
             }
 
             $rules[$name] = $rule;
@@ -1038,12 +1039,13 @@ class CmsResourceController extends Controller
                 'title' => 'Portfolio',
                 'singular' => 'Portfolio',
                 'description' => 'Kelola portfolio visual dan logo klien.',
-                'fillable' => ['title', 'description', 'imageUrl', 'logoUrl', 'logoText', 'link'],
+                'fillable' => ['title', 'description', 'imageUrl', 'logoUrl', 'logoText', 'link', 'published', 'sortOrder'],
                 'search' => ['title', 'description', 'logoText'],
-                'sort' => ['createdAt', 'desc'],
+                'sort' => ['sortOrder', 'asc'],
                 'columns' => [
                     ['key' => 'title', 'label' => 'Judul', 'primary' => true],
                     ['key' => 'logoText', 'label' => 'Logo Text'],
+                    ['key' => 'published', 'label' => 'Status', 'type' => 'boolean'],
                     ['key' => 'link', 'label' => 'Link'],
                 ],
                 'fields' => [
@@ -1053,6 +1055,32 @@ class CmsResourceController extends Controller
                     ['name' => 'logoUrl', 'label' => 'Logo URL', 'type' => 'text'],
                     ['name' => 'logoText', 'label' => 'Logo Text', 'type' => 'text'],
                     ['name' => 'link', 'label' => 'Link', 'type' => 'text'],
+                    ['name' => 'sortOrder', 'label' => 'Urutan Tampil', 'type' => 'number'],
+                    ['name' => 'published', 'label' => 'Tampilkan di Website', 'type' => 'boolean'],
+                ],
+            ],
+            'testimonials' => [
+                'key' => 'testimonials',
+                'table' => 'testimonial',
+                'model' => Testimonial::class,
+                'title' => 'Testimoni',
+                'singular' => 'Testimoni',
+                'description' => 'Kelola testimoni pelanggan yang tampil di homepage dan halaman publik.',
+                'fillable' => ['name', 'role', 'quote', 'imageUrl', 'published', 'sortOrder'],
+                'search' => ['name', 'role', 'quote'],
+                'sort' => ['sortOrder', 'asc'],
+                'columns' => [
+                    ['key' => 'name', 'label' => 'Nama', 'primary' => true],
+                    ['key' => 'role', 'label' => 'Peran'],
+                    ['key' => 'published', 'label' => 'Status', 'type' => 'boolean'],
+                ],
+                'fields' => [
+                    ['name' => 'name', 'label' => 'Nama Pelanggan', 'type' => 'text', 'required' => true],
+                    ['name' => 'role', 'label' => 'Peran / Instansi', 'type' => 'text'],
+                    ['name' => 'quote', 'label' => 'Testimoni', 'type' => 'textarea', 'required' => true],
+                    ['name' => 'imageUrl', 'label' => 'Foto dari Media Library', 'type' => 'text'],
+                    ['name' => 'sortOrder', 'label' => 'Urutan Tampil', 'type' => 'number'],
+                    ['name' => 'published', 'label' => 'Tampilkan di Website', 'type' => 'boolean'],
                 ],
             ],
             'settings' => [
@@ -1137,7 +1165,7 @@ class CmsResourceController extends Controller
                 'label' => 'Umum',
                 'description' => 'Identitas utama website dan teks dasar brand.',
                 'fields' => [
-                    ['key' => 'site_title', 'label' => 'Site Title', 'type' => 'text', 'placeholder' => 'Lanyard Bekasi'],
+                    ['key' => 'site_title', 'label' => 'Site Title', 'type' => 'text', 'placeholder' => 'Lanyard Jogja'],
                     ['key' => 'site_description', 'label' => 'Site Description', 'type' => 'textarea', 'placeholder' => 'Cetak lanyard custom untuk kebutuhan brand dan event.'],
                     ['key' => 'footer_text', 'label' => 'Footer Text', 'type' => 'textarea'],
                 ],
@@ -1146,11 +1174,11 @@ class CmsResourceController extends Controller
                 'label' => 'Brand Media',
                 'description' => 'Logo, favicon, dan gambar preview untuk kebutuhan brand/SEO.',
                 'fields' => [
-                    ['key' => 'site_logo', 'label' => 'Logo Utama', 'type' => 'image', 'fallback' => '/uploads/lanyard-bekasi-logo.webp'],
-                    ['key' => 'site_logo_header', 'label' => 'Logo Header', 'type' => 'image', 'fallback' => '/uploads/lanyard-bekasi-logo.webp'],
-                    ['key' => 'site_logo_mobile', 'label' => 'Logo Mobile', 'type' => 'image', 'fallback' => '/uploads/lanyard-bekasi-logo.webp'],
-                    ['key' => 'site_favicon', 'label' => 'Favicon', 'type' => 'image', 'fallback' => '/uploads/lanyard-bekasi-favicon.webp'],
-                    ['key' => 'og_image', 'label' => 'Open Graph Image', 'type' => 'image', 'fallback' => '/uploads/lanyard-bekasi-logo.webp'],
+                    ['key' => 'site_logo', 'label' => 'Logo Utama', 'type' => 'image', 'fallback' => '/uploads/lanyard-jogja-logo.webp'],
+                    ['key' => 'site_logo_header', 'label' => 'Logo Header', 'type' => 'image', 'fallback' => '/uploads/lanyard-jogja-logo.webp'],
+                    ['key' => 'site_logo_mobile', 'label' => 'Logo Mobile', 'type' => 'image', 'fallback' => '/uploads/lanyard-jogja-logo.webp'],
+                    ['key' => 'site_favicon', 'label' => 'Favicon', 'type' => 'image', 'fallback' => '/uploads/lanyard-jogja-favicon.webp'],
+                    ['key' => 'og_image', 'label' => 'Open Graph Image', 'type' => 'image', 'fallback' => '/uploads/lanyard-jogja-logo.webp'],
                 ],
             ],
             'kontak' => [
@@ -1159,7 +1187,7 @@ class CmsResourceController extends Controller
                 'fields' => [
                     ['key' => 'contact_phone', 'label' => 'Telepon', 'type' => 'text', 'placeholder' => '+62 822-1020-0700'],
                     ['key' => 'contact_whatsapp', 'label' => 'WhatsApp', 'type' => 'text', 'placeholder' => '6282210200700'],
-                    ['key' => 'contact_email', 'label' => 'Email', 'type' => 'email', 'placeholder' => 'info@lanyardbekasi.com'],
+                    ['key' => 'contact_email', 'label' => 'Email', 'type' => 'email', 'placeholder' => 'info@lanyardjogja.com'],
                     ['key' => 'contact_address', 'label' => 'Alamat', 'type' => 'textarea', 'placeholder' => 'Depok, Indonesia'],
                 ],
             ],

@@ -15,11 +15,11 @@ class ServiceWarrantyPageTest extends TestCase
         $response
             ->assertOk()
             ->assertSee('Layanan Cetak Lanyard Custom untuk Berbagai Kebutuhan')
-            ->assertSee('Halo%20Lanyard%20Bekasi%2C%20saya%20mau%20konsultasi%20layanan%20lanyard%20custom.', false)
+            ->assertSee('Halo%20Lanyard%20Jogja%2C%20saya%20mau%20konsultasi%20layanan%20lanyard%20custom.', false)
             ->assertSee('href="'.route('products.index').'"', false)
             ->assertSee('href="'.route('ordering').'"', false)
             ->assertSee('/css/service-pages.css', false)
-            ->assertSee('/uploads/hero-layanan-lanyard-bekasi.webp', false)
+            ->assertSee('/uploads/hero-layanan-lanyard.webp', false)
             ->assertDontSee('Pusat Tali Lanyard')
             ->assertDontSee('â€”');
 
@@ -35,7 +35,7 @@ class ServiceWarrantyPageTest extends TestCase
         $this->assertSame(0, $xpath->query('//section[@id="faq-layanan"]//details[@open]')->length);
         $this->assertSame(
             1,
-            $xpath->query('//section[@id="services-hero"]//img[@src="/uploads/hero-layanan-lanyard-bekasi.webp" and @width="1448" and @height="1086" and @fetchpriority="high"]')->length
+            $xpath->query('//section[@id="services-hero"]//img[@src="/uploads/hero-layanan-lanyard.webp" and @width="1448" and @height="1086" and @fetchpriority="high"]')->length
         );
         $this->assertSame(
             2,
@@ -61,7 +61,7 @@ class ServiceWarrantyPageTest extends TestCase
         $response
             ->assertOk()
             ->assertSee('Garansi yang Jelas untuk Hasil Produksi Anda')
-            ->assertSee('Halo%20Lanyard%20Bekasi%2C%20saya%20ingin%20mengajukan%20klaim%20garansi%20untuk%20pesanan%20lanyard.', false)
+            ->assertSee('Halo%20Lanyard%20Jogja%2C%20saya%20ingin%20mengajukan%20klaim%20garansi%20untuk%20pesanan%20lanyard.', false)
             ->assertSee('href="'.route('terms').'"', false)
             ->assertSee('3x24 jam')
             ->assertSee('5 sampai 10 persen')
@@ -84,7 +84,7 @@ class ServiceWarrantyPageTest extends TestCase
         $this->assertSame(0, $xpath->query('//section[@id="faq-garansi"]//details[@open]')->length);
         $this->assertSame(
             1,
-            $xpath->query('//section[@id="warranty-hero"]//img[@src="/uploads/hero-garansi-lanyard-bekasi.webp" and @width="1448" and @height="1086" and @fetchpriority="high"]')->length
+            $xpath->query('//section[@id="warranty-hero"]//img[@src="/uploads/hero-garansi-lanyard.webp" and @width="1448" and @height="1086" and @fetchpriority="high"]')->length
         );
         $this->assertSame(
             2,
@@ -111,8 +111,8 @@ class ServiceWarrantyPageTest extends TestCase
         $serviceFaq = collect($servicesSchemas)->firstWhere('@type', 'FAQPage');
 
         $this->assertNotNull($service);
-        $this->assertSame('https://lanyardbekasi.com/layanan', $service['url']);
-        $this->assertSame('https://lanyardbekasi.com/layanan', $serviceBreadcrumb['itemListElement'][1]['item']);
+        $this->assertSame('https://lanyardjogja.com/layanan', $service['url']);
+        $this->assertSame('https://lanyardjogja.com/layanan', $serviceBreadcrumb['itemListElement'][1]['item']);
         $this->assertCount(4, $serviceFaq['mainEntity']);
 
         $warranty = $this->get('/garansi')->assertOk();
@@ -122,8 +122,8 @@ class ServiceWarrantyPageTest extends TestCase
         $warrantyFaq = collect($warrantySchemas)->firstWhere('@type', 'FAQPage');
 
         $this->assertNotNull($page);
-        $this->assertSame('https://lanyardbekasi.com/garansi', $page['url']);
-        $this->assertSame('https://lanyardbekasi.com/garansi', $warrantyBreadcrumb['itemListElement'][1]['item']);
+        $this->assertSame('https://lanyardjogja.com/garansi', $page['url']);
+        $this->assertSame('https://lanyardjogja.com/garansi', $warrantyBreadcrumb['itemListElement'][1]['item']);
         $this->assertCount(4, $warrantyFaq['mainEntity']);
 
         foreach ($serviceFaq['mainEntity'] as $entity) {
@@ -143,8 +143,8 @@ class ServiceWarrantyPageTest extends TestCase
 
         $this->assertIsString($css);
         $this->assertStringContainsString('--info-section-space: 80px;', $css);
-        $this->assertStringContainsString('--info-green: #3f8c1b;', $css);
-        $this->assertStringContainsString('--info-dark: #073b29;', $css);
+        $this->assertStringContainsString('--info-green: var(--brand-primary);', $css);
+        $this->assertStringContainsString('--info-dark: var(--brand-ink);', $css);
         $this->assertStringContainsString('padding: var(--info-section-space) 0;', $css);
         $this->assertStringContainsString('min-height: 50px;', $css);
         $this->assertStringContainsString('@media (prefers-reduced-motion: reduce)', $css);

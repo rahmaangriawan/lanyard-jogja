@@ -2,7 +2,7 @@
     $user = auth()->user();
     $resource = request()->route('resource');
     $categoryType = request('type');
-    $showPortfolioMenu = false;
+    $showPortfolioMenu = true;
     $adminMenuGroups = [
         'Utama' => [
             ['label' => 'Ringkasan', 'href' => route('dashboard'), 'icon' => 'dashboard', 'active' => request()->routeIs('dashboard')],
@@ -25,6 +25,7 @@
             ...($showPortfolioMenu ? [
                 ['label' => 'Portofolio', 'href' => route('cms.index', 'portfolio'), 'icon' => 'file', 'active' => $resource === 'portfolio'],
             ] : []),
+            ['label' => 'Testimoni', 'href' => route('cms.index', 'testimonials'), 'icon' => 'file', 'active' => $resource === 'testimonials'],
             ['label' => 'Formulir', 'href' => route('cms.index', 'inquiries'), 'icon' => 'file', 'active' => $resource === 'inquiries'],
         ],
         'Sistem' => [
@@ -57,13 +58,13 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>@yield('title', 'Dashboard') · Lanyard Bekasi</title>
+    <title>@yield('title', 'Dashboard') · Lanyard Jogja</title>
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <script>
       (function () {
-        var color = localStorage.getItem("lanyardbekasi-dashboard-primary");
+        var color = localStorage.getItem("lanyardjogja-dashboard-primary");
         if (color) document.documentElement.style.setProperty("--meridian-accent", color);
       })();
     </script>
@@ -221,10 +222,10 @@
         object-fit: contain;
       }
       .dashboard-brand-logo--full {
-        padding: .4rem .5rem;
-        border-radius: .65rem;
-        background: #172033;
-        box-shadow: inset 0 0 0 1px rgb(255 255 255 / .1);
+        padding: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
       }
       .dashboard-brand-logo--icon {
         display: none;
@@ -247,8 +248,8 @@
       <aside class="sidebar sidebar--lg sidebar--app" data-stisla-sidebar>
         <header class="sidebar__header">
           <a class="sidebar__brand" href="{{ route('dashboard') }}">
-            <img class="dashboard-brand-logo dashboard-brand-logo--full" src="/uploads/lanyard-bekasi-logo.webp" alt="Lanyard Bekasi" />
-            <img class="dashboard-brand-logo dashboard-brand-logo--icon" src="/uploads/lanyard-bekasi-favicon.webp" alt="Lanyard Bekasi" />
+            <img class="dashboard-brand-logo dashboard-brand-logo--full" src="/uploads/lanyard-jogja-logo.webp" alt="Lanyard Jogja" />
+            <img class="dashboard-brand-logo dashboard-brand-logo--icon" src="/uploads/lanyard-jogja-favicon.webp" alt="Lanyard Jogja" />
           </a>
         </header>
 

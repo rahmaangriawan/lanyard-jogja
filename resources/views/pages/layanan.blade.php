@@ -1,9 +1,9 @@
 @extends('layouts.public')
 
-@section('title', 'Layanan Cetak Lanyard Custom | Lanyard Bekasi')
+@section('title', 'Layanan Cetak Lanyard Custom | Lanyard Jogja')
 @section('meta_description', 'Layanan cetak lanyard custom dengan konsultasi spesifikasi, bantuan desain, pilihan bahan dan aksesori, produksi, quality control, serta pengiriman.')
 @section('seo_canonical', rtrim(config('app.url', url('/')), '/') . '/layanan')
-@section('seo_og_image', '/uploads/hero-layanan-lanyard-bekasi.webp')
+@section('seo_og_image', '/uploads/hero-layanan-lanyard.webp')
 
 @push('head')
   <link rel="stylesheet" href="/css/service-pages.css?v={{ file_exists(public_path('css/service-pages.css')) ? filemtime(public_path('css/service-pages.css')) : 1 }}">
@@ -11,14 +11,7 @@
 
 @section('content')
 @php
-  $whatsappUrl = 'https://wa.me/6282210200700?text='.rawurlencode('Halo Lanyard Bekasi, saya mau konsultasi layanan lanyard custom.');
-
-  $trustItems = [
-    ['icon' => 'design_services', 'title' => 'Bantuan Desain', 'description' => 'Mockup sebelum produksi'],
-    ['icon' => 'sell', 'title' => 'Pilihan Spesifikasi', 'description' => 'Sesuai fungsi dan anggaran'],
-    ['icon' => 'verified', 'title' => 'Quality Control', 'description' => 'Diperiksa sebelum dikemas'],
-    ['icon' => 'local_shipping', 'title' => 'Pengiriman Luas', 'description' => 'Jabodetabek dan nasional'],
-  ];
+  $whatsappUrl = 'https://wa.me/6282210200700?text='.rawurlencode('Halo Lanyard Jogja, saya mau konsultasi layanan lanyard custom.');
 
   $capabilities = [
     ['icon' => 'forum', 'title' => 'Konsultasi dan Quotation', 'description' => 'Tim membantu merangkum jumlah, target penggunaan, bahan, aksesori, serta kebutuhan waktu sebelum menyiapkan penawaran.'],
@@ -72,8 +65,8 @@
       <div class="info-hero__visual info-hero__visual--landscape">
         <div class="info-hero__image-frame">
           <img
-            src="/uploads/hero-layanan-lanyard-bekasi.webp"
-            alt="Contoh hasil layanan cetak lanyard custom Lanyard Bekasi"
+            src="/uploads/hero-layanan-lanyard.webp"
+            alt="Contoh hasil layanan cetak lanyard custom Lanyard Jogja"
             width="1448"
             height="1086"
             decoding="async"
@@ -81,19 +74,6 @@
           >
         </div>
       </div>
-    </div>
-  </section>
-
-  <section class="info-trust" aria-label="Kepastian layanan Lanyard Bekasi">
-    <div class="info-shell">
-      <ul class="info-trust__list">
-        @foreach($trustItems as $item)
-          <li>
-            <span class="info-icon material-symbols-outlined" aria-hidden="true">{{ $item['icon'] }}</span>
-            <span><strong>{{ $item['title'] }}</strong><small>{{ $item['description'] }}</small></span>
-          </li>
-        @endforeach
-      </ul>
     </div>
   </section>
 

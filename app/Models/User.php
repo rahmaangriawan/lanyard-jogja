@@ -98,7 +98,7 @@ class User extends Authenticatable implements MustVerifyEmail
             return false;
         }
 
-        if (in_array($resource, ['posts', 'pages'], true)) {
+        if ($resource === 'posts') {
             return true;
         }
 

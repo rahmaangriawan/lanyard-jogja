@@ -1,4 +1,4 @@
-/* Homepage FAQ. Native details accordion with a restrained editorial treatment. */
+﻿/* Homepage FAQ. Native details accordion with a restrained editorial treatment. */
 
 .home-faq,
 .home-faq *,
@@ -13,7 +13,7 @@
   --faq-line: #dbe2ea;
   --faq-panel: #f7f9fb;
   --faq-panel-hover: #f2f6f4;
-  --faq-accent: #117a3a;
+  --faq-accent: var(--brand-primary);
   background: #ffffff;
   padding: clamp(76px, 8vw, 112px) 0;
   color: var(--faq-ink);

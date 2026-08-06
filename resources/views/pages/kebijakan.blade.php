@@ -1,18 +1,19 @@
 @extends('layouts.public')
 
-@section('title', 'Kebijakan Privasi | Lanyard Bekasi')
-@section('meta_description', 'Pelajari cara Lanyard Bekasi mengumpulkan, menggunakan, menyimpan, dan melindungi data pribadi serta file desain pelanggan.')
+@section('title', 'Kebijakan Privasi | Lanyard Jogja')
+@section('meta_description', 'Pelajari cara Lanyard Jogja mengumpulkan, menggunakan, menyimpan, dan melindungi data pribadi serta file desain pelanggan.')
 @section('seo_canonical', rtrim(config('app.url', url('/')), '/') . '/kebijakan')
 @section('seo_noindex', '1')
 
 @push('head')
+  <link rel="stylesheet" href="/css/public-info.css?v={{ file_exists(public_path('css/public-info.css')) ? filemtime(public_path('css/public-info.css')) : 1 }}">
   <link rel="stylesheet" href="/css/service-pages.css?v={{ file_exists(public_path('css/service-pages.css')) ? filemtime(public_path('css/service-pages.css')) : 1 }}">
   <link rel="stylesheet" href="/css/privacy-index.css?v={{ file_exists(public_path('css/privacy-index.css')) ? filemtime(public_path('css/privacy-index.css')) : 1 }}">
 @endpush
 
 @section('content')
 @php
-  $privacyWhatsappUrl = 'https://wa.me/6282210200700?text='.rawurlencode('Halo Lanyard Bekasi, saya ingin bertanya mengenai kebijakan privasi dan data saya.');
+  $privacyWhatsappUrl = 'https://wa.me/6282210200700?text='.rawurlencode('Halo Lanyard Jogja, saya ingin bertanya mengenai kebijakan privasi dan data saya.');
 
   $privacyTrust = [
     ['icon' => 'verified', 'title' => 'Data Dilindungi', 'description' => 'Akses dibatasi sesuai kebutuhan'],
@@ -52,28 +53,19 @@
         </p>
       </div>
 
-      <aside class="privacy-hero__summary" aria-label="Ringkasan komitmen privasi">
-        <span class="privacy-hero__summary-icon material-symbols-outlined" aria-hidden="true">verified_user</span>
-        <h2>Komitmen Kami</h2>
-        <p>Data pelanggan digunakan untuk melayani pesanan dan komunikasi yang berkaitan dengan layanan.</p>
-        <ul>
-          <li><span class="material-symbols-outlined" aria-hidden="true">check_circle</span><span>Data tidak dijual untuk pemasaran pihak ketiga.</span></li>
-          <li><span class="material-symbols-outlined" aria-hidden="true">check_circle</span><span>File desain tidak dijadikan sampel tanpa izin.</span></li>
-          <li><span class="material-symbols-outlined" aria-hidden="true">check_circle</span><span>Permintaan penghapusan dapat diajukan kepada tim.</span></li>
-        </ul>
-      </aside>
     </div>
   </section>
 
-  <section class="privacy-trust" aria-label="Ringkasan perlindungan data">
+  <section class="privacy-commitments" aria-labelledby="privacy-commitments-title">
     <div class="info-shell">
-      <ul class="info-trust__list">
-        @foreach($privacyTrust as $item)
-          <li>
-            <span class="info-icon material-symbols-outlined" aria-hidden="true">{{ $item['icon'] }}</span>
-            <span><strong>{{ $item['title'] }}</strong><small>{{ $item['description'] }}</small></span>
-          </li>
-        @endforeach
+      <div class="privacy-commitments__header">
+        <p class="info-eyebrow">Komitmen Privasi</p>
+        <h2 id="privacy-commitments-title">Hal yang Kami Jaga dalam Setiap Pesanan</h2>
+      </div>
+      <ul class="privacy-commitments__list">
+        <li><span class="material-symbols-outlined" aria-hidden="true">verified_user</span><span>Data tidak dijual untuk pemasaran pihak ketiga.</span></li>
+        <li><span class="material-symbols-outlined" aria-hidden="true">lock</span><span>File desain tidak dijadikan sampel tanpa izin.</span></li>
+        <li><span class="material-symbols-outlined" aria-hidden="true">delete</span><span>Permintaan penghapusan dapat diajukan kepada tim.</span></li>
       </ul>
     </div>
   </section>
@@ -92,21 +84,29 @@
             <a href="#cookie">Cookie dan pelacakan</a>
             <a href="#pembaruan">Pembaruan kebijakan</a>
           </nav>
+          <p class="privacy-toc__updated">Terakhir diperbarui: Juli 2025</p>
+          <a class="privacy-toc__contact" href="{{ $privacyWhatsappUrl }}" target="_blank" rel="noopener noreferrer">Tanya tim privasi</a>
         </div>
       </aside>
 
       <div class="privacy-document">
+        <details class="legal-mobile-toc">
+          <summary>Daftar isi kebijakan <span class="material-symbols-outlined" aria-hidden="true">expand_more</span></summary>
+          <nav>
+            <a href="#pendahuluan">Pendahuluan</a><a href="#data-dikumpulkan">Data yang dikumpulkan</a><a href="#penggunaan-data">Penggunaan data</a><a href="#file-desain">Perlindungan file desain</a><a href="#keamanan-data">Keamanan data</a><a href="#cookie">Cookie dan pelacakan</a><a href="#pembaruan">Pembaruan kebijakan</a>
+          </nav>
+        </details>
         <header class="privacy-document__header">
           <h2 id="privacy-content-title">Bagaimana Kami Mengelola Informasi Anda</h2>
-          <p>Penjelasan berikut berlaku untuk interaksi melalui website, WhatsApp, email, dan komunikasi langsung dengan Lanyard Bekasi.</p>
+          <p>Penjelasan berikut berlaku untuk interaksi melalui website, WhatsApp, email, dan komunikasi langsung dengan Lanyard Jogja.</p>
         </header>
 
         <article class="privacy-section" id="pendahuluan">
           <span class="privacy-section__marker" aria-hidden="true">01</span>
           <div>
             <h2>Pendahuluan</h2>
-            <p>Selamat datang di Lanyard Bekasi. Kebijakan Privasi ini menjelaskan komitmen kami dalam menjaga kerahasiaan data dan informasi yang Anda berikan saat menggunakan layanan kami, baik melalui website, WhatsApp, email, maupun komunikasi langsung.</p>
-            <p>Dengan menggunakan layanan Lanyard Bekasi, Anda menyetujui pengumpulan dan penggunaan informasi sesuai dengan kebijakan ini. Jika Anda tidak setuju, mohon untuk tidak menggunakan layanan kami.</p>
+            <p>Selamat datang di Lanyard Jogja. Kebijakan Privasi ini menjelaskan komitmen kami dalam menjaga kerahasiaan data dan informasi yang Anda berikan saat menggunakan layanan kami, baik melalui website, WhatsApp, email, maupun komunikasi langsung.</p>
+            <p>Dengan menggunakan layanan Lanyard Jogja, Anda menyetujui pengumpulan dan penggunaan informasi sesuai dengan kebijakan ini. Jika Anda tidak setuju, mohon untuk tidak menggunakan layanan kami.</p>
           </div>
         </article>
 
@@ -180,7 +180,7 @@
           <span class="privacy-section__marker" aria-hidden="true">06</span>
           <div>
             <h2>Cookie dan Teknologi Pelacakan</h2>
-            <p>Website Lanyard Bekasi dapat menggunakan cookie untuk mengingat preferensi kunjungan, menganalisis trafik, dan memastikan fungsi esensial website berjalan dengan baik.</p>
+            <p>Website Lanyard Jogja dapat menggunakan cookie untuk mengingat preferensi kunjungan, menganalisis trafik, dan memastikan fungsi esensial website berjalan dengan baik.</p>
             <p>Anda dapat menonaktifkan cookie melalui pengaturan browser. Beberapa fitur website mungkin tidak berfungsi optimal setelah cookie dinonaktifkan.</p>
           </div>
         </article>
@@ -203,7 +203,7 @@
       <div class="info-cta__panel">
         <div>
           <h2 id="privacy-cta-title">Masih Memiliki Pertanyaan tentang Data Anda?</h2>
-          <p>Sampaikan pertanyaan atau permintaan Anda. Tim Lanyard Bekasi akan membantu memberikan informasi yang relevan.</p>
+          <p>Sampaikan pertanyaan atau permintaan Anda. Tim Lanyard Jogja akan membantu memberikan informasi yang relevan.</p>
         </div>
         <a href="{{ $privacyWhatsappUrl }}" target="_blank" rel="noopener noreferrer">
           <img src="/images/whatsapp.svg" alt="" width="20" height="20" aria-hidden="true">

@@ -15,10 +15,10 @@ class ShippingPageTest extends TestCase
         $response
             ->assertOk()
             ->assertSee('Pengiriman Aman dan Terpantau ke Seluruh Indonesia')
-            ->assertSee('Halo%20Lanyard%20Bekasi%2C%20saya%20mau%20konsultasi%20pengiriman%20lanyard%20custom.', false)
+            ->assertSee('Halo%20Lanyard%20Jogja%2C%20saya%20mau%20konsultasi%20pengiriman%20lanyard%20custom.', false)
             ->assertSee('href="'.route('area').'"', false)
             ->assertSee('/css/shipping-index.css', false)
-            ->assertSee('/uploads/lanyard-bekasi-cta.webp', false)
+            ->assertSee('/uploads/lanyard-cta.webp', false)
             ->assertDontSee('Indonesia Raya')
             ->assertDontSee('Kota Indonesia')
             ->assertDontSee('Lanyard Indonesia')
@@ -46,7 +46,7 @@ class ShippingPageTest extends TestCase
         $this->assertSame(0, $xpath->query('//section[@id="faq-pengiriman"]//details[@open]')->length);
         $this->assertSame(
             1,
-            $xpath->query('//section[@id="shipping-hero"]//img[@src="/uploads/lanyard-bekasi-cta.webp" and @width="941" and @height="1672" and @fetchpriority="high"]')->length
+            $xpath->query('//section[@id="shipping-hero"]//img[@src="/uploads/lanyard-cta.webp" and @width="941" and @height="1672" and @fetchpriority="high"]')->length
         );
         $this->assertSame(
             1,
@@ -92,7 +92,7 @@ class ShippingPageTest extends TestCase
         $faq = collect($schemas)->firstWhere('@type', 'FAQPage');
 
         $this->assertNotNull($breadcrumb);
-        $this->assertSame('https://lanyardbekasi.com/pengiriman', $breadcrumb['itemListElement'][1]['item']);
+        $this->assertSame('https://lanyardjogja.com/pengiriman', $breadcrumb['itemListElement'][1]['item']);
         $this->assertNotNull($faq);
         $this->assertCount(4, $faq['mainEntity']);
         $this->assertSame(
@@ -118,8 +118,8 @@ class ShippingPageTest extends TestCase
 
         $this->assertIsString($css);
         $this->assertStringContainsString('--shipping-section-space: 80px;', $css);
-        $this->assertStringContainsString('--shipping-green: #3f8c1b;', $css);
-        $this->assertStringContainsString('--shipping-dark: #073b29;', $css);
+        $this->assertStringContainsString('--shipping-green: var(--brand-primary);', $css);
+        $this->assertStringContainsString('--shipping-dark: var(--brand-ink);', $css);
         $this->assertStringContainsString('padding: var(--shipping-section-space) 0;', $css);
         $this->assertStringContainsString('@media (prefers-reduced-motion: reduce)', $css);
     }

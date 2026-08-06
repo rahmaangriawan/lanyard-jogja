@@ -8,8 +8,8 @@
 .site-footer {
   width: 100%;
   overflow: hidden;
-  background: #073b29;
-  color: #f4faef;
+  background: var(--brand-ink);
+  color: var(--brand-panel);
 }
 
 .site-footer__container {
@@ -47,14 +47,14 @@
 .site-footer__brand > p {
   max-width: 32ch;
   margin: 18px 0 0;
-  color: #d1e3d3;
+  color: #e8d9c8;
   font-size: 13px;
   line-height: 1.65;
 }
 
 .site-footer__nav {
   display: grid;
-  grid-template-columns: 0.9fr 0.8fr 1.5fr;
+  grid-template-columns: .9fr 1fr 1fr;
   gap: clamp(28px, 4vw, 64px);
 }
 
@@ -69,6 +69,10 @@
   text-transform: uppercase;
 }
 
+.site-footer__contact-wrap {
+  margin-top: 32px;
+}
+
 .site-footer__nav-group ul {
   display: grid;
   gap: 10px;
@@ -79,7 +83,7 @@
 
 .site-footer__nav a,
 .site-footer__contact a {
-  color: #d1e3d3;
+  color: #e8d9c8;
   font-size: 13px;
   line-height: 1.5;
   text-decoration: none;
@@ -95,7 +99,7 @@
   display: grid;
   gap: 11px;
   margin: 0;
-  color: #d1e3d3;
+  color: #e8d9c8;
   font-size: 13px;
   font-style: normal;
   line-height: 1.55;
@@ -113,7 +117,7 @@
 .site-footer__contact .material-symbols-outlined {
   width: 20px !important;
   height: 20px !important;
-  color: #96ce74;
+  color: var(--brand-yellow);
   font-size: 18px !important;
 }
 
@@ -123,17 +127,17 @@
   justify-content: flex-start;
   gap: 24px;
   margin-top: 34px;
-  border-top: 1px solid rgb(216 239 219 / 0.18);
+  border-top: 1px solid rgb(220 200 177 / 0.24);
   padding-top: 20px;
 }
 
 .site-footer__bottom small {
-  color: #b9d1bd;
+  color: #cdbba5;
   font-size: 12px;
 }
 
 .site-footer a:focus-visible {
-  outline: 3px solid rgb(180 230 147 / 0.55);
+  outline: 3px solid rgb(252 213 63 / 0.72);
   outline-offset: 4px;
 }
 
@@ -142,6 +146,8 @@
     grid-template-columns: 1fr;
     gap: 40px;
   }
+
+  .site-footer__nav { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
 @media (max-width: 600px) {
@@ -153,10 +159,6 @@
   .site-footer__nav {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 34px 24px;
-  }
-
-  .site-footer__contact-wrap {
-    grid-column: 1 / -1;
   }
 
   .site-footer__bottom {

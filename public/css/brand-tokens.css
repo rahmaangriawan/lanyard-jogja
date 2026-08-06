@@ -1,0 +1,30 @@
+:root {
+  --brand-cream: #f2ead8;
+  --brand-cream-soft: #f8f1e6;
+  --brand-panel: #fdf8f0;
+  --brand-panel-muted: #f6ede1;
+  --brand-ink: #2a1a0a;
+  --brand-ink-soft: #4e3a28;
+  --brand-muted: #7a6654;
+  --brand-line: #dcc8b1;
+  --brand-primary: #b05d32;
+  --brand-primary-strong: #8e4726;
+  --brand-primary-soft: #f3e2d5;
+  --brand-primary-rgb: 176 93 50;
+  --brand-tan: #d8c4a8;
+  --brand-yellow: #fcd53f;
+}
+
+body.public-site {
+  background: var(--brand-cream);
+  color: var(--brand-ink);
+}
+
+.public-site main {
+  background: var(--brand-cream);
+}
+
+.public-site ::selection {
+  background: var(--brand-tan);
+  color: var(--brand-ink);
+}

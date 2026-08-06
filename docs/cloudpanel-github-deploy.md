@@ -1,4 +1,6 @@
-# Deploy CloudPanel lewat GitHub Actions
+# Historical CloudPanel GitHub Actions Runbook
+
+> Historical reference only. The deploy workflow is intentionally disabled for this local Jogja migration; do not deploy from this checkout.
 
 Workflow production berada di `.github/workflows/deploy.yml`. Push ke branch
 `main` akan menjalankan test, build aset, membuat paket, mengirimnya melalui

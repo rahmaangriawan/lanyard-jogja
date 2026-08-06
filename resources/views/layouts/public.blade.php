@@ -40,7 +40,7 @@
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
-    <link rel="icon" type="image/webp" sizes="1024x1024" href="/uploads/lanyard-bekasi-favicon.webp">
+    <link rel="icon" type="image/webp" sizes="1024x1024" href="/uploads/lanyard-jogja-favicon.webp">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
     {{-- Web App Manifest --}}
@@ -51,18 +51,15 @@
     <link rel="preload" href="/font-assets/geist-700" as="font" type="font/woff2" crossorigin>
 
     @if(request()->is('/'))
-    <link rel="preload" href="/uploads/hero-lanyard-bekasi-custom-01-480w.webp" as="image" type="image/webp" fetchpriority="high"
-      imagesrcset="/uploads/hero-lanyard-bekasi-custom-01-192w.webp 192w, /uploads/hero-lanyard-bekasi-custom-01-320w.webp 320w, /uploads/hero-lanyard-bekasi-custom-01-480w.webp 480w, /uploads/hero-lanyard-bekasi-custom-01-640w.webp 640w, /uploads/hero-lanyard-bekasi-custom-01.webp 940w"
-      imagesizes="(max-width: 520px) 150px, (max-width: 980px) 210px, 250px">
+    <link rel="preload" href="/uploads/hero-lanyard-jogja.webp" as="image" type="image/webp" fetchpriority="high">
     @endif
     @if(request()->routeIs('ordering'))
-    <link rel="preload" href="/uploads/hero-cara-pemesanan-lanyard-bekasi.webp" as="image" type="image/webp" fetchpriority="high">
+    <link rel="preload" href="/uploads/hero-cara-pemesanan-lanyard.webp" as="image" type="image/webp" fetchpriority="high">
     @endif
 
     {{-- Bundled CSS: Tailwind + colors + global + header + hero + fonts (minified) --}}
     @php
-        $publicCache = \Illuminate\Support\Facades\Cache::store(config('cache.public_store', 'file'));
-        $assetsVersion = $publicCache->remember('assets_version_hashes_v5', 86400, function () {
+        $assetsVersion = \App\Support\HomePageCache::assetVersions(function () {
             $appCssPath = public_path('build/public/site.min.css');
             $publicSiteJsPath = public_path('build/public/site.min.js');
             return [
@@ -150,7 +147,7 @@
 
     @stack('schema')
 </head>
-<body class="bg-slate-50 text-slate-900">
+<body class="public-site">
 
     <x-header />
 

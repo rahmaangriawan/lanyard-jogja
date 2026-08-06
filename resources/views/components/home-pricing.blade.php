@@ -63,7 +63,7 @@
       @foreach ($pricingItems as $item)
         @php
           $itemWhatsappUrl = 'https://wa.me/6282210200700?text=' . rawurlencode(
-            'Halo Lanyard Bekasi, saya mau konsultasi harga ' . $item['name'] . '.'
+            'Halo Lanyard Jogja, saya mau konsultasi harga ' . $item['name'] . '.'
           );
         @endphp
 

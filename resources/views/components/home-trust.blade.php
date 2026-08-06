@@ -7,7 +7,7 @@
   ];
 @endphp
 
-<section class="home-trust" aria-label="Keunggulan utama Lanyard Bekasi">
+<section class="home-trust" aria-label="Keunggulan utama Lanyard Jogja">
   <div class="home-trust__panel">
     <ul class="home-trust__list">
       @foreach ($trustItems as $item)

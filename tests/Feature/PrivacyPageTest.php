@@ -13,7 +13,7 @@ class PrivacyPageTest extends TestCase
         parent::setUp();
 
         config([
-            'app.url' => 'https://lanyardbekasi.com',
+            'app.url' => 'https://lanyardjogja.com',
             'cache.public_store' => 'array',
         ]);
     }
@@ -27,10 +27,10 @@ class PrivacyPageTest extends TestCase
             ->assertSee('Kebijakan Privasi yang Jelas dan Transparan')
             ->assertSee('/css/service-pages.css', false)
             ->assertSee('/css/privacy-index.css', false)
-            ->assertSee('<link rel="canonical" href="https://lanyardbekasi.com/kebijakan"', false)
+            ->assertSee('<link rel="canonical" href="https://lanyardjogja.com/kebijakan"', false)
             ->assertSee('<meta name="robots" content="noindex, follow">', false)
-            ->assertSee('Halo%20Lanyard%20Bekasi%2C%20saya%20ingin%20bertanya%20mengenai%20kebijakan%20privasi%20dan%20data%20saya.', false)
-            ->assertSee('Bekasi, Indonesia')
+            ->assertSee('Halo%20Lanyard%20Jogja%2C%20saya%20ingin%20bertanya%20mengenai%20kebijakan%20privasi%20dan%20data%20saya.', false)
+            ->assertSee('Jogja, Indonesia')
             ->assertDontSee('Lanyard Indonesia')
             ->assertDontSee('Indonesia Kota')
             ->assertDontSee('Jl. Sudirman No. 123');
@@ -55,10 +55,10 @@ class PrivacyPageTest extends TestCase
         $breadcrumb = collect($schemas)->firstWhere('@type', 'BreadcrumbList');
 
         $this->assertNotNull($page);
-        $this->assertSame('https://lanyardbekasi.com/kebijakan', $page['url']);
+        $this->assertSame('https://lanyardjogja.com/kebijakan', $page['url']);
         $this->assertSame('id-ID', $page['inLanguage']);
         $this->assertNotNull($breadcrumb);
-        $this->assertSame('https://lanyardbekasi.com/kebijakan', $breadcrumb['itemListElement'][1]['item']);
+        $this->assertSame('https://lanyardjogja.com/kebijakan', $breadcrumb['itemListElement'][1]['item']);
     }
 
     public function test_privacy_styles_keep_spacing_accessibility_and_mobile_layout(): void

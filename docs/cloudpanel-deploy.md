@@ -1,4 +1,6 @@
-# Deploy CloudPanel Lanyard Bekasi
+# Historical CloudPanel Deploy Runbook (Lanyard Bekasi)
+
+> Historical reference only. The deploy workflow is intentionally disabled for this local Jogja migration; do not deploy from this checkout.
 
 Workflow deploy berada di `.github/workflows/deploy.yml` dan memakai repository:
 

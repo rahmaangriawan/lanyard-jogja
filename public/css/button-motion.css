@@ -12,23 +12,23 @@
   content: "";
   position: absolute;
   z-index: 0;
-  width: 72%;
-  height: 180%;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
   background: currentColor;
-  opacity: 0.1;
-  transform: skewY(-16deg) translateY(0);
+  opacity: 0.16;
+  transform: translateY(0);
   transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .ptl-button-motion::before {
-  top: -184%;
-  left: -22%;
+  top: 0;
+  left: 0;
+  transform: translateY(-104%);
 }
 
 .ptl-button-motion::after {
-  right: -22%;
-  bottom: -184%;
+  display: none;
 }
 
 .ptl-button-motion > *:not(.ptl-button-motion__label),
@@ -51,12 +51,7 @@
 @media (hover: hover) and (pointer: fine) {
   .ptl-button-motion:hover::before,
   .ptl-button-motion:focus-visible::before {
-    transform: skewY(-16deg) translateY(102%);
-  }
-
-  .ptl-button-motion:hover::after,
-  .ptl-button-motion:focus-visible::after {
-    transform: skewY(-16deg) translateY(-102%);
+    transform: translateY(0);
   }
 
   .ptl-button-motion:hover .ptl-button-motion__label,

@@ -1,19 +1,23 @@
 @php
-  $heroQuotationUrl = 'https://wa.me/6282210200700?text='.rawurlencode('Halo Lanyard Bekasi, saya mau pesan lanyard custom.');
+  $heroQuotationUrl = 'https://wa.me/6282210200700?text='.rawurlencode('Halo Lanyard Jogja, saya mau pesan lanyard custom.');
 @endphp
 
 <section id="hero" class="ptl-hero" aria-labelledby="hero-title">
   <div class="ptl-hero__container">
     <div class="ptl-hero__content">
-      <p class="ptl-hero__eyebrow">Vendor Lanyard Bekasi Terpercaya</p>
+      <p class="ptl-hero__eyebrow">
+        <span class="material-symbols-outlined" aria-hidden="true">location_city</span>
+        <span>Vendor Terpercaya di Jogja</span>
+      </p>
       <h1 id="hero-title" class="ptl-hero__title">
-        <span>Print Lanyard</span>
-        <span>Custom <strong>Murah</strong></span>
+        <span>Cetak</span>
+        <span>Lanyard</span>
+        <span>Custom</span>
+        <strong>Jogja</strong>
       </h1>
 
-      <p class="ptl-hero__lead">Kualitas premium, harga bersahabat, dan proses pemesanan yang mudah.</p>
       <p class="ptl-hero__description">
-        Cetak lanyard custom untuk perusahaan, event, sekolah, dan komunitas. Konsultasi desain langsung dengan tim kami.
+        Spesialis cetak tali ID card, wristband lanyard, dan keychain berkualitas tinggi. Produksi kilat, harga terjangkau, gratis ongkir ke seluruh Indonesia.
       </p>
 
       <div class="ptl-hero__actions">
@@ -23,48 +27,46 @@
           rel="noopener noreferrer"
           class="ptl-hero__cta ptl-hero__cta--primary"
         >
-          <img src="/images/whatsapp.svg" alt="" width="20" height="20" loading="eager" decoding="async" aria-hidden="true">
-          <span>Pesan via WhatsApp</span>
+          <span class="material-symbols-outlined" aria-hidden="true">shopping_cart</span>
+          <span>Pesan Sekarang</span>
         </a>
         <a href="{{ route('products.index') }}" class="ptl-hero__cta ptl-hero__cta--secondary">
+          <span class="material-symbols-outlined" aria-hidden="true">inventory_2</span>
           <span>Lihat Produk</span>
-          <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
         </a>
       </div>
     </div>
 
     <div class="ptl-hero__visual" aria-label="Contoh hasil cetak lanyard custom">
-      <div class="ptl-hero__shape" aria-hidden="true"></div>
-      <figure class="ptl-hero__product ptl-hero__product--back">
-        <img
-          src="/uploads/hero-lanyard-bekasi-custom-02-320w.webp"
-          srcset="/uploads/hero-lanyard-bekasi-custom-02-192w.webp 192w, /uploads/hero-lanyard-bekasi-custom-02-320w.webp 320w, /uploads/hero-lanyard-bekasi-custom-02-480w.webp 480w, /uploads/hero-lanyard-bekasi-custom-02-640w.webp 640w, /uploads/hero-lanyard-bekasi-custom-02.webp 941w"
-          sizes="(max-width: 520px) 140px, (max-width: 980px) 190px, 230px"
-          alt="Contoh lanyard custom biru dan putih Lanyard Bekasi"
-          width="941"
-          height="1451"
-          loading="eager"
-          decoding="async"
-        >
-      </figure>
-      <figure class="ptl-hero__product ptl-hero__product--front">
-        <img
-          src="/uploads/hero-lanyard-bekasi-custom-01-320w.webp"
-          srcset="/uploads/hero-lanyard-bekasi-custom-01-192w.webp 192w, /uploads/hero-lanyard-bekasi-custom-01-320w.webp 320w, /uploads/hero-lanyard-bekasi-custom-01-480w.webp 480w, /uploads/hero-lanyard-bekasi-custom-01-640w.webp 640w, /uploads/hero-lanyard-bekasi-custom-01.webp 940w"
-          sizes="(max-width: 520px) 150px, (max-width: 980px) 210px, 250px"
-          alt="Contoh lanyard custom hijau dan hitam Lanyard Bekasi"
-          width="940"
-          height="1436"
-          loading="eager"
-          fetchpriority="high"
-          decoding="async"
-        >
-      </figure>
-      <div class="ptl-hero__price">
-        <span>Harga mulai</span>
-        <strong>Rp 3.000</strong>
-        <small>/pcs</small>
+      <img
+        class="ptl-hero__image"
+        src="/uploads/hero-lanyard-jogja.webp"
+        alt="Koleksi lanyard custom bertema Jogja dengan ID card dan aksesori"
+        width="1448"
+        height="1086"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      >
+      <div class="ptl-hero__shipping" aria-label="Gratis ongkir se-Indonesia">
+        <span class="material-symbols-outlined" aria-hidden="true">local_shipping</span>
+        <span>Gratis Ongkir<br>Se-Indonesia</span>
       </div>
     </div>
+
+    <ul class="ptl-hero__metrics" aria-label="Ringkasan performa Lanyard Jogja">
+      <li>
+        <span class="material-symbols-outlined" aria-hidden="true">inventory_2</span>
+        <span><strong>10.000+</strong><small>Pcs / Hari</small></span>
+      </li>
+      <li>
+        <span class="material-symbols-outlined" aria-hidden="true">schedule</span>
+        <span><strong>1–3 hr</strong><small>Waktu Produksi</small></span>
+      </li>
+      <li>
+        <span class="ptl-hero__metric-star" aria-hidden="true">★</span>
+        <span><strong>5.0</strong><small>Rating Pelanggan</small></span>
+      </li>
+    </ul>
   </div>
 </section>

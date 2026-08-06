@@ -11,12 +11,12 @@ return [
         ['question' => 'Apakah semua pengiriman ke Jabodetabek gratis?', 'answer' => 'Gratis ongkir berlaku untuk layanan reguler sesuai ketentuan promo aktif. Layanan khusus, pengiriman prioritas, atau tujuan tertentu akan dikonfirmasi terlebih dahulu.'],
         ['question' => 'Apakah tersedia layanan Same Day?', 'answer' => 'Opsi prioritas atau Same Day dapat tersedia berdasarkan kesiapan produksi, waktu persetujuan desain, lokasi tujuan, dan ketersediaan kurir. Tim akan mengonfirmasi kelayakannya sebelum pesanan diproses.'],
         ['question' => 'Kapan nomor resi diberikan?', 'answer' => 'Nomor resi diberikan setelah paket diterima oleh ekspedisi dan data pengiriman tersedia pada sistem kurir.'],
-        ['question' => 'Bagaimana jika paket rusak atau hilang?', 'answer' => 'Tim Lanyard Bekasi akan membantu proses follow-up dan klaim asuransi apabila layanan pengiriman yang digunakan memiliki perlindungan asuransi.'],
+        ['question' => 'Bagaimana jika paket rusak atau hilang?', 'answer' => 'Tim Lanyard Jogja akan membantu proses follow-up dan klaim asuransi apabila layanan pengiriman yang digunakan memiliki perlindungan asuransi.'],
     ],
     'warranty_faq' => [
         ['question' => 'Apa yang termasuk dalam garansi produksi?', 'answer' => 'Garansi berlaku untuk cacat produksi major yang terbukti murni berasal dari proses produksi atau quality control, seperti hasil cetak pudar ekstrem, tali putus, atau stopper rusak.'],
         ['question' => 'Berapa batas waktu pengajuan klaim?', 'answer' => 'Komplain dan pengajuan garansi harus dikirimkan maksimal 3x24 jam setelah status pelacakan kurir menunjukkan barang telah diterima.'],
         ['question' => 'Bukti apa yang diperlukan untuk klaim?', 'answer' => 'Pemesan perlu menyertakan nomor pesanan serta bukti foto dan video unboxing yang jelas agar kondisi produk dapat divalidasi.'],
-        ['question' => 'Bagaimana jika paket rusak atau hilang saat dikirim?', 'answer' => 'Keterlambatan, kehilangan, atau kerusakan akibat kurir berada di luar cakupan garansi produksi. Tim Lanyard Bekasi tetap membantu proses follow-up dan klaim asuransi jika pengiriman menggunakan asuransi.'],
+        ['question' => 'Bagaimana jika paket rusak atau hilang saat dikirim?', 'answer' => 'Keterlambatan, kehilangan, atau kerusakan akibat kurir berada di luar cakupan garansi produksi. Tim Lanyard Jogja tetap membantu proses follow-up dan klaim asuransi jika pengiriman menggunakan asuransi.'],
     ],
 ];

@@ -34,9 +34,8 @@ Google telah menghentikan endpoint ping sitemap anonim. Implementasi ini memakai
 
 ## Pemeriksaan produksi
 
-1. Pastikan `APP_URL=https://pusattalilanyard.com`.
+1. Untuk deployment di masa depan, pastikan `APP_URL=https://lanyardjogja.com`.
 2. Pastikan scheduler aktif dan kredensial Search Console terisi.
 3. Buka `/sitemap.xml` dan satu child sitemap.
 4. Uji satu artikel di Rich Results Test dan validator Open Graph.
 5. Pastikan URL bertanda UTM mengarah 301 ke URL bersih.
-

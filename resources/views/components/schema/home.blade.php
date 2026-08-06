@@ -2,14 +2,14 @@
   $siteUrlRaw = config('app.url');
   if (empty($siteUrlRaw)) { $siteUrlRaw = url('/'); }
   $siteUrl = rtrim($siteUrlRaw, '/');
-  $logoUrl = $siteUrl . '/uploads/lanyard-bekasi-logo.webp';
-  $logoHeaderUrl = $siteUrl . '/uploads/lanyard-bekasi-logo.webp';
+  $logoUrl = $siteUrl . '/uploads/lanyard-jogja-logo.webp';
+  $logoHeaderUrl = $siteUrl . '/uploads/lanyard-jogja-logo.webp';
 
   $orgSchema = [
     '@context' => 'https://schema.org',
     '@type' => 'Organization',
     '@id' => $siteUrl . '/#organization',
-    'name' => 'Lanyard Bekasi',
+    'name' => 'Lanyard Jogja',
     'url' => $siteUrl . '/',
     'logo' => [
       '@type' => 'ImageObject',
@@ -19,7 +19,7 @@
     ],
     'image' => $logoUrl,
     'telephone' => '+6282210200700',
-    'email' => 'info@lanyardbekasi.com',
+    'email' => 'info@lanyardjogja.com',
     'description' => 'Cetak lanyard custom premium di Indonesia dengan pilihan bahan berkualitas, desain profesional, dan layanan pemesanan mudah. Bebas ongkir Indonesia Raya.',
     'sameAs' => [
       'https://wa.me/6282210200700',
@@ -36,7 +36,7 @@
     '@context' => 'https://schema.org',
     '@type' => 'LocalBusiness',
     '@id' => $siteUrl . '/#localbusiness',
-    'name' => 'Lanyard Bekasi',
+    'name' => 'Lanyard Jogja',
     'url' => $siteUrl . '/',
     'logo' => $logoUrl,
     'image' => $logoHeaderUrl,
@@ -62,7 +62,7 @@
       ['@type' => 'City', 'name' => 'Bogor'],
       ['@type' => 'City', 'name' => 'Depok'],
       ['@type' => 'City', 'name' => 'Tangerang'],
-      ['@type' => 'City', 'name' => 'Bekasi'],
+      ['@type' => 'City', 'name' => 'Yogyakarta'],
     ],
   ];
 
@@ -71,7 +71,7 @@
     '@type' => 'WebSite',
     '@id' => $siteUrl . '/#website',
     'url' => $siteUrl . '/',
-    'name' => 'Lanyard Bekasi',
+    'name' => 'Lanyard Jogja',
     'publisher' => ['@id' => $siteUrl . '/#organization'],
     'inLanguage' => 'id-ID',
     'potentialAction' => [

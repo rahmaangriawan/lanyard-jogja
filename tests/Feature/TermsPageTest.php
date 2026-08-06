@@ -13,7 +13,7 @@ class TermsPageTest extends TestCase
         parent::setUp();
 
         config([
-            'app.url' => 'https://lanyardbekasi.com',
+            'app.url' => 'https://lanyardjogja.com',
             'cache.public_store' => 'array',
         ]);
     }
@@ -27,9 +27,9 @@ class TermsPageTest extends TestCase
             ->assertSee('Syarat yang Jelas Sebelum Pesanan Diproduksi')
             ->assertSee('/css/service-pages.css', false)
             ->assertSee('/css/terms-index.css', false)
-            ->assertSee('<link rel="canonical" href="https://lanyardbekasi.com/syarat-ketentuan"', false)
+            ->assertSee('<link rel="canonical" href="https://lanyardjogja.com/syarat-ketentuan"', false)
             ->assertSee('<meta name="robots" content="noindex, follow">', false)
-            ->assertSee('Halo%20Lanyard%20Bekasi%2C%20saya%20ingin%20berkonsultasi%20mengenai%20syarat%20pemesanan%20lanyard%20custom.', false)
+            ->assertSee('Halo%20Lanyard%20Jogja%2C%20saya%20ingin%20berkonsultasi%20mengenai%20syarat%20pemesanan%20lanyard%20custom.', false)
             ->assertSee('href="'.route('ordering').'"', false)
             ->assertSee('href="'.route('shipping').'"', false)
             ->assertSee('href="'.route('warranty').'"', false)
@@ -71,11 +71,11 @@ class TermsPageTest extends TestCase
         $breadcrumb = collect($schemas)->firstWhere('@type', 'BreadcrumbList');
 
         $this->assertNotNull($page);
-        $this->assertSame('https://lanyardbekasi.com/syarat-ketentuan', $page['url']);
+        $this->assertSame('https://lanyardjogja.com/syarat-ketentuan', $page['url']);
         $this->assertSame('id-ID', $page['inLanguage']);
         $this->assertSame('2026-07-31', $page['dateModified']);
         $this->assertNotNull($breadcrumb);
-        $this->assertSame('https://lanyardbekasi.com/syarat-ketentuan', $breadcrumb['itemListElement'][1]['item']);
+        $this->assertSame('https://lanyardjogja.com/syarat-ketentuan', $breadcrumb['itemListElement'][1]['item']);
     }
 
     public function test_terms_styles_keep_spacing_accessibility_and_responsive_layout(): void

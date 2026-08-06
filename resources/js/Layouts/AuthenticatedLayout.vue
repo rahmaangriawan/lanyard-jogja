@@ -96,7 +96,7 @@ const applyThemeColor = (color: string) => {
     themeColor.value = color;
     document.documentElement.style.setProperty('--dashboard-primary', color);
     document.documentElement.style.setProperty('--dashboard-primary-strong', color);
-    localStorage.setItem('lanyardbekasi-dashboard-primary', color);
+    localStorage.setItem('lanyardjogja-dashboard-primary', color);
 };
 
 const applyThemeColorFromEvent = (event: Event) => {
@@ -104,7 +104,7 @@ const applyThemeColorFromEvent = (event: Event) => {
 };
 
 onMounted(() => {
-    const saved = localStorage.getItem('lanyardbekasi-dashboard-primary');
+    const saved = localStorage.getItem('lanyardjogja-dashboard-primary');
     if (saved) {
         applyThemeColor(saved);
     }
@@ -124,7 +124,7 @@ const logout = () => router.post(route('logout'));
             <header class="sidebar__header">
                 <Link class="sidebar__brand" :href="route('dashboard')" @click="sidebarOpen = false">
                     <span class="meridian-brand-mark">LD</span>
-                    <span>Lanyard Bekasi</span>
+                    <span>Lanyard Jogja</span>
                 </Link>
                 <button class="btn btn-icon btn-ghost lg:hidden" type="button" @click="sidebarOpen = false" aria-label="Tutup sidebar">
                     <X :size="18" />

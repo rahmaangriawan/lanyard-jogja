@@ -18,8 +18,8 @@ class ProductDetailPageTest extends TestCase
         parent::setUp();
 
         config([
-            'app.url' => 'https://lanyardbekasi.com',
-            'app.prod_url' => 'https://lanyardbekasi.com',
+            'app.url' => 'https://lanyardjogja.com',
+            'app.prod_url' => 'https://lanyardjogja.com',
             'cache.public_store' => 'array',
         ]);
     }
@@ -79,13 +79,13 @@ class ProductDetailPageTest extends TestCase
             ->assertSee('Pesan Custom dalam 4 Tahap')
             ->assertSee('Produk Serupa')
             ->assertSee('Pesan via WhatsApp')
-            ->assertSee('Lanyard Bekasi dengan hasil cetak tajam')
+            ->assertSee('Lanyard Jogja dengan hasil cetak tajam')
             ->assertDontSee('IndoLanyard')
             ->assertDontSee('5.0')
             ->assertDontSee('12 ulasan')
             ->assertDontSee('Rp12.900')
             ->assertDontSee('/vendor/splide/', false)
-            ->assertSee('<link rel="canonical" href="https://lanyardbekasi.com/produk/lanyard-printing-dengan-stopper">', false);
+            ->assertSee('<link rel="canonical" href="https://lanyardjogja.com/produk/lanyard-printing-dengan-stopper">', false);
 
         [$document, $xpath] = $this->dom($response->getContent());
 
@@ -116,7 +116,7 @@ class ProductDetailPageTest extends TestCase
         $this->assertSame('Lanyard Printing dengan Stopper', $productSchema['name']);
         $this->assertSame('LB-DETAIL-01', $productSchema['sku']);
         $this->assertSame('17000', $productSchema['offers']['price']);
-        $this->assertSame('Lanyard Bekasi', $productSchema['brand']['name']);
+        $this->assertSame('Lanyard Jogja', $productSchema['brand']['name']);
         $this->assertArrayNotHasKey('aggregateRating', $productSchema);
         $this->assertArrayNotHasKey('availability', $productSchema['offers']);
 

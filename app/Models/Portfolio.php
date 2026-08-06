@@ -13,7 +13,17 @@ class Portfolio extends Model
 
     protected $table = 'portfolio';
 
-    protected $fillable = ['title', 'description', 'imageUrl', 'logoUrl', 'logoText', 'link'];
+    protected $fillable = ['title', 'description', 'imageUrl', 'logoUrl', 'logoText', 'link', 'published', 'sortOrder'];
+
+    protected function casts(): array
+    {
+        return [
+            'published' => 'boolean',
+            'sortOrder' => 'integer',
+            'createdAt' => 'datetime',
+            'updatedAt' => 'datetime',
+        ];
+    }
 
     public function attributesToArray(): array
     {

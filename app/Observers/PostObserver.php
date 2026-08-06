@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Post;
+use App\Support\HomePageCache;
 use Illuminate\Support\Facades\Cache;
 
 class PostObserver
@@ -10,8 +11,7 @@ class PostObserver
     private function clearCache(): void
     {
         $cache = Cache::store(config('cache.public_store', 'file'));
-        $cache->forget('home_posts');
-        $cache->forget('home_response_html');
+        HomePageCache::invalidatePosts();
         $cache->forget('public_sitemap_posts');
         $cache->put('seo_sitemap_dirty', true, now()->addDays(7));
     }

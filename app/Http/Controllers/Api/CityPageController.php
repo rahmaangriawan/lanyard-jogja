@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\CityPage;
+use App\Rules\SafePublicUrl;
 use App\Support\HtmlSanitizer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -53,7 +54,7 @@ class CityPageController extends Controller
             'slug' => ['nullable', 'string', 'max:255', 'unique:citypage,slug'.($ignoreId ? ','.$ignoreId : '')],
             'content' => ['required', 'string'],
             'published' => ['nullable', 'boolean'],
-            'featuredImage' => ['nullable', 'string', 'max:255'],
+            'featuredImage' => ['nullable', 'string', 'max:255', new SafePublicUrl],
             'parentId' => ['nullable', 'integer', 'exists:citypage,id'],
             'metaTitle' => ['nullable', 'string', 'max:255'],
             'metaDescription' => ['nullable', 'string'],

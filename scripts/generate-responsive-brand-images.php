@@ -9,18 +9,18 @@ declare(strict_types=1);
 $publicPath = dirname(__DIR__).'/public';
 $images = [
     [
-        'source' => $publicPath.'/uploads/hero-lanyard-bekasi-custom-01.webp',
-        'prefix' => 'hero-lanyard-bekasi-custom-01',
+        'source' => $publicPath.'/uploads/hero-lanyard-custom-01.webp',
+        'prefix' => 'hero-lanyard-custom-01',
         'widths' => [192, 320, 480, 640],
     ],
     [
-        'source' => $publicPath.'/uploads/hero-lanyard-bekasi-custom-02.webp',
-        'prefix' => 'hero-lanyard-bekasi-custom-02',
+        'source' => $publicPath.'/uploads/hero-lanyard-custom-02.webp',
+        'prefix' => 'hero-lanyard-custom-02',
         'widths' => [192, 320, 480, 640],
     ],
     [
-        'source' => $publicPath.'/uploads/lanyard-bekasi-logo.webp',
-        'prefix' => 'lanyard-bekasi-logo',
+        'source' => $publicPath.'/uploads/lanyard-jogja-logo.webp',
+        'prefix' => 'lanyard-jogja-logo',
         'widths' => [160, 256],
     ],
 ];

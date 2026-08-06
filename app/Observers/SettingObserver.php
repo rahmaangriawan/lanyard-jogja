@@ -3,15 +3,14 @@
 namespace App\Observers;
 
 use App\Models\Setting;
+use App\Support\HomePageCache;
 use Illuminate\Support\Facades\Cache;
 
 class SettingObserver
 {
     private function clearCache(): void
     {
-        $publicCache = Cache::store(config('cache.public_store', 'file'));
-        $publicCache->forget('home_seo_settings');
-        $publicCache->forget('home_response_html');
+        HomePageCache::invalidateSettings();
         Cache::forget('seo_auto_links_runtime');
     }
 

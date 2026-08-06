@@ -1,7 +1,7 @@
 @php
   $siteUrl = rtrim((string) config('app.url', url('/')), '/');
   if (str_contains($siteUrl, 'localhost') || str_contains($siteUrl, '127.0.0.1')) {
-    $siteUrl = 'https://lanyardbekasi.com';
+    $siteUrl = 'https://lanyardjogja.com';
   }
 
   $canonicalUrl = $siteUrl . '/syarat-ketentuan';
@@ -9,14 +9,14 @@
     '@context' => 'https://schema.org',
     '@type' => 'WebPage',
     '@id' => $canonicalUrl . '/#webpage',
-    'name' => 'Syarat dan Ketentuan Pemesanan Lanyard Bekasi',
-    'description' => 'Ketentuan persetujuan mockup, pembayaran, toleransi produksi, pengiriman, pembatalan, dan garansi pemesanan Lanyard Bekasi.',
+    'name' => 'Syarat dan Ketentuan Pemesanan Lanyard Jogja',
+    'description' => 'Ketentuan persetujuan mockup, pembayaran, toleransi produksi, pengiriman, pembatalan, dan garansi pemesanan Lanyard Jogja.',
     'url' => $canonicalUrl,
     'inLanguage' => 'id-ID',
     'dateModified' => '2026-07-31',
     'isPartOf' => [
       '@type' => 'WebSite',
-      'name' => 'Lanyard Bekasi',
+      'name' => 'Lanyard Jogja',
       'url' => $siteUrl,
     ],
   ];

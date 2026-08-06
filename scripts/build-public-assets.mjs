@@ -6,6 +6,7 @@ import { transform as transformJs } from 'esbuild';
 const root = resolve(import.meta.dirname, '..');
 const bundles = {
   'public/build/public/site.min.css': [
+    'public/css/brand-tokens.css',
     'public/css/app.min.css',
     'public/vendor/scroll/scroll-reveal.css',
     'public/css/header.css',
@@ -23,7 +24,8 @@ const bundles = {
     'public/vendor/scroll/scroll-reveal.js',
   ],
   'public/build/public/home.min.js': [
-    'public/js/home-testimonials.js',
+    'public/js/home-marquee.js',
+    'public/js/home-product-fan.js',
   ],
 };
 

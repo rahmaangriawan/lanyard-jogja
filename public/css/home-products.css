@@ -1,4 +1,4 @@
-/* Homepage featured products. Static 4x2 desktop grid, compact 2-column mobile grid. */
+﻿/* Homepage featured products. Static 4x2 desktop grid, compact 2-column mobile grid. */
 
 .home-products,
 .home-products *,
@@ -12,7 +12,7 @@
   --products-muted: #667085;
   --products-line: #e1e6eb;
   --products-panel: #f7f9f8;
-  --products-green: #117a3a;
+  --products-green: var(--brand-primary);
   background: #ffffff;
   padding: clamp(76px, 8vw, 112px) 0;
   color: var(--products-ink);

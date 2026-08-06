@@ -1,4 +1,4 @@
-/* Homepage national delivery coverage with Jabodetabek as the primary service area. */
+﻿/* Homepage national delivery coverage with Jabodetabek as the primary service area. */
 
 .home-locations,
 .home-locations *,
@@ -11,7 +11,7 @@
   --locations-ink: #172033;
   --locations-muted: #667085;
   --locations-line: #dde4e9;
-  --locations-green: #117a3a;
+  --locations-green: var(--brand-primary);
   background: #f6f8f7;
   padding: clamp(76px, 8vw, 112px) 0;
   color: var(--locations-ink);
@@ -50,7 +50,7 @@
   aspect-ratio: 16 / 7;
   border: 1px solid var(--locations-line);
   border-radius: 14px;
-  background: #e9eeeb;
+  background: var(--brand-panel-muted);
 }
 
 .home-locations__map:focus-within {
@@ -92,7 +92,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  background: #eaf5ee;
+  background: var(--brand-primary-soft);
   color: var(--locations-green);
   font-size: 20px;
 }

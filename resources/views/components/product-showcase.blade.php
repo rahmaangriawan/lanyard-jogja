@@ -31,7 +31,7 @@
       <h2 id="home-products-title">Pilihan Lanyard Custom Favorit</h2>
     </header>
 
-    <ul class="home-products__grid" aria-label="Produk unggulan Lanyard Bekasi">
+    <ul class="home-products__grid" aria-label="Produk unggulan Lanyard Jogja">
       @foreach ($products as $product)
         @php
           $image = $asset($product->featuredImage ?? null);

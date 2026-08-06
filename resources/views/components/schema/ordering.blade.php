@@ -1,7 +1,7 @@
 @php
   $siteUrl = rtrim((string) config('app.url', url('/')), '/');
   if (str_contains($siteUrl, 'localhost') || str_contains($siteUrl, '127.0.0.1')) {
-    $siteUrl = 'https://lanyardbekasi.com';
+    $siteUrl = 'https://lanyardjogja.com';
   }
   $canonicalUrl = $siteUrl . '/cara-pemesanan';
 
@@ -11,7 +11,7 @@
     '@id' => $canonicalUrl . '/#howto',
     'name' => 'Cara Pemesanan Lanyard Custom dalam 6 Langkah',
     'description' => 'Alur pemesanan lanyard custom dari konsultasi kebutuhan hingga produksi, quality control, dan pengiriman.',
-    'image' => $siteUrl . '/uploads/hero-cara-pemesanan-lanyard-bekasi.webp',
+    'image' => $siteUrl . '/uploads/hero-cara-pemesanan-lanyard.webp',
     'step' => collect($orderSteps)->values()->map(fn ($step, $index) => [
       '@type' => 'HowToStep',
       'position' => $index + 1,

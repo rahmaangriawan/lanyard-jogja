@@ -14,7 +14,7 @@
 
 .faq-hero__visual .info-hero__image-frame {
   background:
-    radial-gradient(circle at 50% 35%, rgb(124 182 94 / .16), transparent 52%),
+    radial-gradient(circle at 50% 35%, rgb(var(--brand-primary-rgb) / .16), transparent 52%),
     #fff;
 }
 
@@ -43,7 +43,7 @@
   padding: 20px;
   color: var(--info-ink);
   text-decoration: none;
-  box-shadow: 0 16px 38px rgb(39 83 27 / .055);
+  box-shadow: 0 16px 38px rgb(var(--brand-primary-rgb) / .055);
   transition:
     border-color 160ms ease,
     box-shadow 160ms ease,
@@ -51,14 +51,14 @@
 }
 
 .faq-topics__list a:hover {
-  border-color: #a8c89e;
-  box-shadow: 0 20px 42px rgb(39 83 27 / .1);
+  border-color: var(--brand-primary-soft);
+  box-shadow: 0 20px 42px rgb(var(--brand-primary-rgb) / .1);
   transform: translateY(-2px);
 }
 
 .faq-topics__list a:focus-visible,
 .faq-category__intro a:focus-visible {
-  outline: 3px solid rgb(63 140 27 / .3);
+  outline: 3px solid rgb(var(--brand-primary-rgb) / .3);
   outline-offset: 4px;
 }
 
@@ -180,7 +180,7 @@
 }
 
 .faq-category__list .info-faq__item {
-  box-shadow: 0 12px 32px rgb(39 83 27 / .045);
+  box-shadow: 0 12px 32px rgb(var(--brand-primary-rgb) / .045);
 }
 
 .faq-category__list .info-faq__item summary {

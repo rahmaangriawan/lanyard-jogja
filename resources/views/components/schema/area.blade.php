@@ -1,10 +1,10 @@
 @php
   $siteUrl = rtrim((string) config('app.url', url('/')), '/');
   if (str_contains($siteUrl, 'localhost') || str_contains($siteUrl, '127.0.0.1')) {
-    $siteUrl = 'https://lanyardbekasi.com';
+    $siteUrl = 'https://lanyardjogja.com';
   }
   $canonicalUrl = $siteUrl . '/area';
-  $areaNames = ['Jakarta', 'Bogor', 'Depok', 'Tangerang', 'Bekasi'];
+  $areaNames = ['Yogyakarta', 'Sleman', 'Bantul', 'Kulon Progo', 'Gunungkidul'];
 
   $serviceSchema = [
     '@context' => 'https://schema.org',
@@ -17,7 +17,7 @@
       '@type' => 'City',
       'name' => $area,
     ])->all(),
-    'description' => 'Lanyard Bekasi melayani produksi dan pengiriman lanyard custom ke seluruh Indonesia dengan cakupan utama Jabodetabek.',
+    'description' => 'Lanyard Jogja melayani produksi dan pengiriman lanyard custom ke seluruh Indonesia dengan cakupan utama Daerah Istimewa Yogyakarta.',
     'url' => $canonicalUrl,
   ];
 

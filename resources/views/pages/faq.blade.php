@@ -1,18 +1,19 @@
 @extends('layouts.public')
 
-@section('title', 'FAQ Lanyard Custom | Pusat Bantuan Lanyard Bekasi')
-@section('meta_description', 'Temukan jawaban seputar produk dan layanan lanyard custom, proses pengiriman, serta garansi produksi Lanyard Bekasi.')
+@section('title', 'FAQ Lanyard Custom | Pusat Bantuan Lanyard Jogja')
+@section('meta_description', 'Temukan jawaban seputar produk dan layanan lanyard custom, proses pengiriman, serta garansi produksi Lanyard Jogja.')
 @section('seo_canonical', rtrim(config('app.url', url('/')), '/') . '/faq')
-@section('seo_og_image', '/uploads/hero-faq-lanyard-bekasi.webp')
+@section('seo_og_image', '/uploads/hero-faq-lanyard.webp')
 
 @push('head')
   <link rel="stylesheet" href="/css/service-pages.css?v={{ file_exists(public_path('css/service-pages.css')) ? filemtime(public_path('css/service-pages.css')) : 1 }}">
   <link rel="stylesheet" href="/css/faq-index.css?v={{ file_exists(public_path('css/faq-index.css')) ? filemtime(public_path('css/faq-index.css')) : 1 }}">
+  <link rel="stylesheet" href="/css/public-info.css?v={{ file_exists(public_path('css/public-info.css')) ? filemtime(public_path('css/public-info.css')) : 1 }}">
 @endpush
 
 @section('content')
 @php
-  $whatsappUrl = 'https://wa.me/6282210200700?text='.rawurlencode('Halo Lanyard Bekasi, saya masih punya pertanyaan tentang lanyard custom.');
+  $whatsappUrl = 'https://wa.me/6282210200700?text='.rawurlencode('Halo Lanyard Jogja, saya masih punya pertanyaan tentang lanyard custom.');
 
   $faqGroups = [
     [
@@ -54,7 +55,7 @@
   <section class="info-hero faq-hero" id="faq-hero" aria-labelledby="faq-title">
     <div class="info-shell info-hero__grid">
       <div class="info-hero__content">
-        <p class="info-eyebrow info-eyebrow--badge">Pusat Bantuan Lanyard Bekasi</p>
+        <p class="info-eyebrow info-eyebrow--badge">Pusat Bantuan Lanyard Jogja</p>
         <h1 id="faq-title">Jawaban untuk Pertanyaan Seputar Lanyard Custom</h1>
         <p class="info-hero__lead">Temukan jawaban tentang produk, proses pemesanan, pengiriman, dan garansi sebelum menghubungi tim kami.</p>
         <div class="info-actions">
@@ -72,8 +73,8 @@
       <div class="info-hero__visual info-hero__visual--landscape faq-hero__visual">
         <div class="info-hero__image-frame">
           <img
-            src="/uploads/hero-faq-lanyard-bekasi.webp"
-            alt="Lanyard custom Lanyard Bekasi"
+            src="/uploads/hero-faq-lanyard.webp"
+            alt="Lanyard custom Lanyard Jogja"
             width="1448"
             height="1086"
             loading="eager"
@@ -156,7 +157,7 @@
         </div>
         <a href="{{ $whatsappUrl }}" target="_blank" rel="noopener noreferrer">
           <img src="/images/whatsapp.svg" alt="" width="20" height="20" aria-hidden="true">
-          <span>Tanya Tim Lanyard Bekasi</span>
+          <span>Tanya Tim Lanyard Jogja</span>
           <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
         </a>
       </div>

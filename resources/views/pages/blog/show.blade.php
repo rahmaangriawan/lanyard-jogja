@@ -18,6 +18,7 @@
 
   $toc = [];
   $tocHtml = '';
+  $tocDesktopHtml = '';
   preg_match_all('/<h([2-6])([^>]*)>(.*?)<\/h\1>/is', $processedContent, $headingMatches, PREG_SET_ORDER);
 
   if (count($headingMatches) >= 2) {
@@ -40,13 +41,17 @@
       return '<h'.$level.' id="'.e($slug).'"'.$attributes.'>'.$match[3].'</h'.$level.'>';
     }, $processedContent);
 
-    $tocHtml = '<details class="article-toc">';
-    $tocHtml .= '<summary><span>Daftar isi</span><span class="material-symbols-outlined" aria-hidden="true">expand_more</span></summary>';
-    $tocHtml .= '<nav aria-label="Daftar isi artikel"><ol>';
+    $tocItemsHtml = '';
     foreach ($toc as $item) {
-      $tocHtml .= '<li class="toc-level-'.$item['level'].'"><a href="#'.e($item['slug']).'">'.e($item['text']).'</a></li>';
+      $tocItemsHtml .= '<li class="toc-level-'.$item['level'].'"><a href="#'.e($item['slug']).'">'.e($item['text']).'</a></li>';
     }
-    $tocHtml .= '</ol></nav></details>';
+
+    $tocDesktopHtml = '<nav class="article-toc article-toc--desktop" aria-label="Daftar isi artikel">';
+    $tocDesktopHtml .= '<p>Daftar isi</p><ol>'.$tocItemsHtml.'</ol></nav>';
+
+    $tocHtml = '<details class="article-toc article-toc--mobile">';
+    $tocHtml .= '<summary><span>Daftar isi</span><span class="material-symbols-outlined" aria-hidden="true">expand_more</span></summary>';
+    $tocHtml .= '<nav aria-label="Daftar isi artikel"><ol>'.$tocItemsHtml.'</ol></nav></details>';
 
   }
 
@@ -55,7 +60,7 @@
   $rawTags = (string) ($post->tags ?? '');
   $parsedTags = collect(explode(',', $rawTags))->map(fn ($tag) => trim($tag))->filter()->unique();
 
-  $authorName = $post->author?->name ?: 'Tim Lanyard Bekasi';
+  $authorName = $post->author?->name ?: 'Tim Lanyard Jogja';
   $authorAvatar = $imageUrl($post->author?->avatar);
   $authorBio = $post->author ? $post->author->bio : AuthorProfile::DEFAULT_BIO;
   $authorSlug = $post->author?->slug ?: Str::slug($authorName);
@@ -65,7 +70,7 @@
   $blogArchiveCssVersion = file_exists($blogArchiveCssPath) ? filemtime($blogArchiveCssPath) : 1;
 @endphp
 
-@section('title', $post->metaTitle ?: $post->title . ' | Lanyard Bekasi')
+@section('title', $post->metaTitle ?: $post->title . ' | Lanyard Jogja')
 @section('meta_description', $post->metaDescription)
 @section('seo_type', 'article')
 @section('seo_canonical', route('blog.show', ['slug' => $post->slug]))
@@ -74,15 +79,16 @@
 @section('seo_modified_time', optional($post->updatedAt)->toAtomString())
 
 @push('head')
-  <link rel="stylesheet" href="/css/blog-show.css?v={{ $blogShowCssVersion }}">
+  <link rel="stylesheet" href="/css/public-info.css?v={{ file_exists(public_path('css/public-info.css')) ? filemtime(public_path('css/public-info.css')) : 1 }}">
   <link rel="stylesheet" href="/css/blog-archive.css?v={{ $blogArchiveCssVersion }}">
+  <link rel="stylesheet" href="/css/blog-show.css?v={{ $blogShowCssVersion }}">
 @endpush
 @push('schema')
   @include('components.schema.blog-post')
 @endpush
 
 @section('content')
-<article class="article-page">
+<article class="article-page blog-detail-page related-count-{{ min(3, $relatedPosts->count()) }}">
   <header class="article-header">
     <div class="article-intro-container{{ $featuredImage ? '' : ' article-intro-container--text-only' }}">
       <div class="article-title-column">
@@ -111,7 +117,7 @@
         <figure class="article-hero-media">
           <img
             src="{{ $featuredImage }}"
-            @if($featuredSrcset) srcset="{{ $featuredSrcset }}" sizes="(min-width: 1024px) 560px, calc(100vw - 32px)" @endif
+            @if($featuredSrcset) srcset="{{ $featuredSrcset }}" sizes="(min-width: 1180px) 1140px, calc(100vw - 32px)" @endif
             alt="{{ $post->title }}"
             width="720"
             height="450"
@@ -123,27 +129,16 @@
     </div>
   </header>
 
-  <div class="article-wide-container article-body-wrap">
+  <div class="article-wide-container article-body-wrap{{ $tocHtml !== '' ? ' has-toc' : ' without-toc' }}">
     <aside class="article-sidebar" aria-label="Navigasi dan berbagi artikel">
       <div class="article-sidebar__inner">
         @if($tocHtml !== '')
+          {!! $tocDesktopHtml !!}
           {!! $tocHtml !!}
         @endif
 
         @include('components.article-share', ['class' => 'article-share--sidebar'])
 
-        @if($relatedPosts->isNotEmpty())
-          <section class="article-related-sidebar" aria-labelledby="article-related-sidebar-title">
-            <div class="article-related-sidebar__heading">
-              <h2 id="article-related-sidebar-title">Artikel terkait</h2>
-            </div>
-            <div class="article-related-sidebar__list">
-              @foreach($relatedPosts as $related)
-                <x-blog.archive-card :post="$related" variant="sidebar" />
-              @endforeach
-            </div>
-          </section>
-        @endif
       </div>
     </aside>
 
@@ -245,7 +240,7 @@
           <p>Baca Berikutnya</p>
           <h2 id="related-title">Artikel Terkait</h2>
         </div>
-        <div class="related-grid">
+        <div class="related-grid related-grid--{{ min(3, $relatedPosts->count()) }}">
           @foreach($relatedPosts as $related)
             <x-blog.archive-card :post="$related" variant="compact" />
           @endforeach

@@ -1,7 +1,7 @@
 {
-    "name": "Lanyard Bekasi",
-    "short_name": "Lanyard Bekasi",
-    "description": "Cetak lanyard custom premium di Bekasi",
+    "name": "Lanyard Jogja",
+    "short_name": "Lanyard Jogja",
+    "description": "Cetak lanyard custom premium di Jogja",
     "start_url": "/",
     "scope": "/",
     "display": "standalone",

@@ -1,18 +1,19 @@
 @extends('layouts.public')
 
-@section('title', 'Syarat dan Ketentuan Pemesanan | Lanyard Bekasi')
-@section('meta_description', 'Pelajari syarat pemesanan Lanyard Bekasi, persetujuan mockup, DP 50%, toleransi produksi, pengiriman, pembatalan, dan pengajuan garansi.')
+@section('title', 'Syarat dan Ketentuan Pemesanan | Lanyard Jogja')
+@section('meta_description', 'Pelajari syarat pemesanan Lanyard Jogja, persetujuan mockup, DP 50%, toleransi produksi, pengiriman, pembatalan, dan pengajuan garansi.')
 @section('seo_canonical', rtrim(config('app.url', url('/')), '/') . '/syarat-ketentuan')
 @section('seo_noindex', '1')
 
 @push('head')
+  <link rel="stylesheet" href="/css/public-info.css?v={{ file_exists(public_path('css/public-info.css')) ? filemtime(public_path('css/public-info.css')) : 1 }}">
   <link rel="stylesheet" href="/css/service-pages.css?v={{ file_exists(public_path('css/service-pages.css')) ? filemtime(public_path('css/service-pages.css')) : 1 }}">
   <link rel="stylesheet" href="/css/terms-index.css?v={{ file_exists(public_path('css/terms-index.css')) ? filemtime(public_path('css/terms-index.css')) : 1 }}">
 @endpush
 
 @section('content')
 @php
-  $termsWhatsappUrl = 'https://wa.me/6282210200700?text='.rawurlencode('Halo Lanyard Bekasi, saya ingin berkonsultasi mengenai syarat pemesanan lanyard custom.');
+  $termsWhatsappUrl = 'https://wa.me/6282210200700?text='.rawurlencode('Halo Lanyard Jogja, saya ingin berkonsultasi mengenai syarat pemesanan lanyard custom.');
 
   $termsTrust = [
     ['icon' => 'design_services', 'title' => 'Mockup Disetujui', 'description' => 'Diperiksa sebelum produksi'],
@@ -59,41 +60,17 @@
         </p>
       </div>
 
-      <aside class="terms-hero__summary" aria-label="Ringkasan syarat utama">
-        <span class="terms-hero__summary-icon material-symbols-outlined" aria-hidden="true">verified_user</span>
-        <h2>Empat Hal Penting</h2>
-        <p>Pastikan poin berikut dipahami sebelum pesanan masuk antrean produksi.</p>
-        <ul>
-          <li><span class="material-symbols-outlined" aria-hidden="true">check_circle</span><span>Produksi dimulai setelah mockup disetujui.</span></li>
-          <li><span class="material-symbols-outlined" aria-hidden="true">check_circle</span><span>DP minimal 50% diperlukan untuk memproses pesanan.</span></li>
-          <li><span class="material-symbols-outlined" aria-hidden="true">check_circle</span><span>Hasil produksi memiliki toleransi teknis.</span></li>
-          <li><span class="material-symbols-outlined" aria-hidden="true">check_circle</span><span>Klaim wajib diajukan maksimal 3x24 jam.</span></li>
-        </ul>
-      </aside>
     </div>
   </section>
 
-  <section class="terms-trust" aria-label="Ringkasan ketentuan pemesanan">
+  <section class="terms-checkpoints" id="ringkasan-syarat" aria-labelledby="terms-overview-title">
     <div class="info-shell">
-      <ul class="info-trust__list">
-        @foreach($termsTrust as $item)
-          <li>
-            <span class="info-icon material-symbols-outlined" aria-hidden="true">{{ $item['icon'] }}</span>
-            <span><strong>{{ $item['title'] }}</strong><small>{{ $item['description'] }}</small></span>
-          </li>
-        @endforeach
-      </ul>
-    </div>
-  </section>
-
-  <section class="terms-overview" id="ringkasan-syarat" aria-labelledby="terms-overview-title">
-    <div class="info-shell">
-      <header class="info-heading">
+      <header class="terms-checkpoints__header">
         <p class="info-eyebrow">Sebelum Memesan</p>
         <h2 id="terms-overview-title">Periksa Empat Tahap yang Paling Menentukan</h2>
         <p>Ringkasan ini membantu Anda memahami keputusan penting sebelum membaca ketentuan lengkap.</p>
       </header>
-      <ul class="terms-overview__grid">
+      <ul class="terms-checkpoints__list">
         @foreach($termsHighlights as $item)
           <li>
             <span class="material-symbols-outlined" aria-hidden="true">{{ $item['icon'] }}</span>
@@ -119,20 +96,28 @@
             <a href="#ketentuan-pengiriman">Pengiriman</a>
             <a href="#pembatalan-garansi">Pembatalan dan garansi</a>
           </nav>
+          <p class="terms-toc__updated">Terakhir diperbarui: 31 Juli 2026</p>
+          <a class="terms-toc__contact" href="{{ $termsWhatsappUrl }}" target="_blank" rel="noopener noreferrer">Tanya syarat pesanan</a>
         </div>
       </aside>
 
       <div class="terms-document">
+        <details class="legal-mobile-toc">
+          <summary>Daftar isi syarat pemesanan <span class="material-symbols-outlined" aria-hidden="true">expand_more</span></summary>
+          <nav>
+            <a href="#ketentuan-umum">Ketentuan umum</a><a href="#hak-cipta">Hak cipta dan desain</a><a href="#persetujuan-mockup">Persetujuan mockup</a><a href="#produksi-toleransi">Produksi dan toleransi</a><a href="#pembayaran">Sistem pembayaran</a><a href="#ketentuan-pengiriman">Pengiriman</a><a href="#pembatalan-garansi">Pembatalan dan garansi</a>
+          </nav>
+        </details>
         <header class="terms-document__header">
           <h2 id="terms-content-title">Ketentuan Lengkap Pemesanan Lanyard Custom</h2>
-          <p>Ketentuan berikut menjadi dasar kesepakatan antara Lanyard Bekasi dan pemesan selama proses desain, produksi, pembayaran, serta pengiriman.</p>
+          <p>Ketentuan berikut menjadi dasar kesepakatan antara Lanyard Jogja dan pemesan selama proses desain, produksi, pembayaran, serta pengiriman.</p>
         </header>
 
         <article class="terms-section" id="ketentuan-umum">
           <span class="terms-section__marker" aria-hidden="true">01</span>
           <div>
             <h2>Ketentuan Umum</h2>
-            <p>Dengan melakukan pemesanan di Lanyard Bekasi, Anda sebagai klien atau pemesan setuju untuk terikat dan mematuhi seluruh Syarat dan Ketentuan di halaman ini. Ketentuan berlaku sebagai kesepakatan transaksi jasa cetak.</p>
+            <p>Dengan melakukan pemesanan di Lanyard Jogja, Anda sebagai klien atau pemesan setuju untuk terikat dan mematuhi seluruh Syarat dan Ketentuan di halaman ini. Ketentuan berlaku sebagai kesepakatan transaksi jasa cetak.</p>
           </div>
         </article>
 
@@ -143,8 +128,8 @@
             <p>Jika klien memberikan file siap cetak atau elemen seperti logo, ikon, dan font, ketentuan berikut berlaku:</p>
             <ul class="terms-list">
               <li><span class="material-symbols-outlined" aria-hidden="true">image</span><span>Klien menjamin materi yang diserahkan tidak melanggar hak cipta, merek dagang, atau kekayaan intelektual pihak lain.</span></li>
-              <li><span class="material-symbols-outlined" aria-hidden="true">policy</span><span>Lanyard Bekasi dibebaskan dari tuntutan hukum yang muncul akibat pelanggaran atas desain yang diberikan klien.</span></li>
-              <li><span class="material-symbols-outlined" aria-hidden="true">design_services</span><span>Desain yang dibuat oleh tim Lanyard Bekasi menjadi hak milik klien setelah transaksi selesai dan lunas.</span></li>
+              <li><span class="material-symbols-outlined" aria-hidden="true">policy</span><span>Lanyard Jogja dibebaskan dari tuntutan hukum yang muncul akibat pelanggaran atas desain yang diberikan klien.</span></li>
+              <li><span class="material-symbols-outlined" aria-hidden="true">design_services</span><span>Desain yang dibuat oleh tim Lanyard Jogja menjadi hak milik klien setelah transaksi selesai dan lunas.</span></li>
             </ul>
           </div>
         </article>
@@ -198,7 +183,7 @@
           <span class="terms-section__marker" aria-hidden="true">06</span>
           <div>
             <h2>Pengiriman dan Logistik</h2>
-            <p>Lanyard Bekasi menyerahkan pesanan kepada ekspedisi atau kurir setelah produksi, quality control, pengemasan, dan pelunasan selesai.</p>
+            <p>Lanyard Jogja menyerahkan pesanan kepada ekspedisi atau kurir setelah produksi, quality control, pengemasan, dan pelunasan selesai.</p>
             <ul class="terms-list terms-list--compact">
               <li><span class="material-symbols-outlined" aria-hidden="true">local_shipping</span><span>Nomor resi dibagikan setelah paket diserahkan kepada ekspedisi agar status pengiriman dapat dipantau.</span></li>
               <li><span class="material-symbols-outlined" aria-hidden="true">local_shipping</span><span>Keterlambatan, kehilangan, atau kerusakan oleh kurir berada di luar proses produksi. Tim membantu follow-up dan klaim asuransi apabila pengiriman menggunakan asuransi.</span></li>

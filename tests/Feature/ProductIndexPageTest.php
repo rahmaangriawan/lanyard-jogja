@@ -16,7 +16,7 @@ class ProductIndexPageTest extends TestCase
         parent::setUp();
 
         config([
-            'app.url' => 'https://lanyardbekasi.com',
+            'app.url' => 'https://lanyardjogja.com',
             'cache.public_store' => 'array',
         ]);
     }
@@ -35,7 +35,7 @@ class ProductIndexPageTest extends TestCase
             ->assertSee('Quality Control')
             ->assertSee('Pengiriman Luas')
             ->assertSee('Belum Yakin Produk Mana yang Paling Sesuai?')
-            ->assertSee('Halo%20Lanyard%20Bekasi%2C%20saya%20ingin%20dibantu%20memilih%20produk%20lanyard%20custom%20yang%20sesuai.', false)
+            ->assertSee('Halo%20Lanyard%20Jogja%2C%20saya%20ingin%20dibantu%20memilih%20produk%20lanyard%20custom%20yang%20sesuai.', false)
             ->assertSee('href="'.route('ordering').'"', false)
             ->assertDontSee('â€œ')
             ->assertDontSee('â€')

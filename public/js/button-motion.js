@@ -1,7 +1,7 @@
 /* Apply one motion language to public CTA buttons without changing their visual style. */
 (function () {
   var selector = [
-    'button:not(.site-header__hamburger):not(.site-header__backdrop):not(.deck-nav)',
+    'button:not(.site-header__hamburger):not(.site-header__backdrop):not(.deck-nav):not(.home-product-fan__select)',
     'a.site-header__btn',
     'a.ptl-hero__cta',
     'a.deck-cta-btn',

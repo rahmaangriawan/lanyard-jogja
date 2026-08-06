@@ -1,4 +1,4 @@
-/* Homepage pricing comparison. Standalone to allow iteration without a frontend build. */
+﻿/* Homepage pricing comparison. Standalone to allow iteration without a frontend build. */
 
 .home-pricing,
 .home-pricing *,
@@ -13,7 +13,7 @@
   --pricing-line: #dfe4ea;
   --pricing-surface: #ffffff;
   --pricing-canvas: #f5f7f8;
-  --pricing-accent: #117a3a;
+  --pricing-accent: var(--brand-primary);
   --pricing-accent-strong: #0d642f;
   overflow: hidden;
   border-bottom: 1px solid var(--pricing-line);

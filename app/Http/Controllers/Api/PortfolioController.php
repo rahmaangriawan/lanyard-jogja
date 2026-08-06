@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Portfolio;
+use App\Rules\SafePublicUrl;
 use Illuminate\Http\Request;
 
 class PortfolioController extends Controller
@@ -39,10 +40,10 @@ class PortfolioController extends Controller
         return $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
-            'imageUrl' => ['required', 'string', 'max:255'],
-            'logoUrl' => ['nullable', 'string', 'max:255'],
+            'imageUrl' => ['required', 'string', 'max:255', new SafePublicUrl],
+            'logoUrl' => ['nullable', 'string', 'max:255', new SafePublicUrl],
             'logoText' => ['nullable', 'string', 'max:255'],
-            'link' => ['nullable', 'string', 'max:255'],
+            'link' => ['nullable', 'string', 'max:255', new SafePublicUrl],
         ]);
     }
 }

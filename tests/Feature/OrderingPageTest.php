@@ -13,7 +13,7 @@ class OrderingPageTest extends TestCase
         parent::setUp();
 
         config([
-            'app.url' => 'https://lanyardbekasi.com',
+            'app.url' => 'https://lanyardjogja.com',
             'cache.public_store' => 'array',
         ]);
     }
@@ -25,12 +25,12 @@ class OrderingPageTest extends TestCase
         $response
             ->assertOk()
             ->assertSee('Pesan Lanyard Custom dengan Alur yang Jelas')
-            ->assertSee('Halo%20Lanyard%20Bekasi%2C%20saya%20mau%20konsultasi%20pemesanan%20lanyard%20custom.', false)
+            ->assertSee('Halo%20Lanyard%20Jogja%2C%20saya%20mau%20konsultasi%20pemesanan%20lanyard%20custom.', false)
             ->assertSee('href="'.route('products.index').'"', false)
             ->assertSee('/css/service-pages.css', false)
             ->assertSee('/css/ordering-index.css', false)
-            ->assertSee('<link rel="preload" href="/uploads/hero-cara-pemesanan-lanyard-bekasi.webp" as="image" type="image/webp" fetchpriority="high">', false)
-            ->assertSee('<link rel="canonical" href="https://lanyardbekasi.com/cara-pemesanan"', false)
+            ->assertSee('<link rel="preload" href="/uploads/hero-cara-pemesanan-lanyard.webp" as="image" type="image/webp" fetchpriority="high">', false)
+            ->assertSee('<link rel="canonical" href="https://lanyardjogja.com/cara-pemesanan"', false)
             ->assertDontSee('dalam 5 Langkah')
             ->assertDontSee('Pusat Tali Lanyard');
 
@@ -38,7 +38,7 @@ class OrderingPageTest extends TestCase
 
         $this->assertSame(1, $xpath->query('//main//h1')->length);
         $this->assertSame(2, $xpath->query('//section[@id="ordering-hero"]//div[contains(concat(" ", normalize-space(@class), " "), " info-actions ")]/a')->length);
-        $this->assertSame(1, $xpath->query('//section[@id="ordering-hero"]//img[@src="/uploads/hero-cara-pemesanan-lanyard-bekasi.webp" and @width="1448" and @height="1086" and @fetchpriority="high"]')->length);
+        $this->assertSame(1, $xpath->query('//section[@id="ordering-hero"]//img[@src="/uploads/hero-cara-pemesanan-lanyard.webp" and @width="1448" and @height="1086" and @fetchpriority="high"]')->length);
         $this->assertSame(4, $xpath->query('//section[@id="ordering-trust"]//ul/li')->length);
         $this->assertSame(6, $xpath->query('//section[@id="ordering-process"]//ol/li')->length);
         $this->assertSame(0, $xpath->query('//section[@id="ordering-process"]//ol/li/span[normalize-space(.)="01" or normalize-space(.)="02" or normalize-space(.)="03" or normalize-space(.)="04" or normalize-space(.)="05" or normalize-space(.)="06"]')->length);
@@ -65,14 +65,14 @@ class OrderingPageTest extends TestCase
         $faqSchema = collect($schemas)->firstWhere('@type', 'FAQPage');
 
         $this->assertNotNull($breadcrumb);
-        $this->assertSame('https://lanyardbekasi.com/cara-pemesanan', $breadcrumb['itemListElement'][1]['item']);
+        $this->assertSame('https://lanyardjogja.com/cara-pemesanan', $breadcrumb['itemListElement'][1]['item']);
         $this->assertNotNull($howTo);
         $this->assertSame('Cara Pemesanan Lanyard Custom dalam 6 Langkah', $howTo['name']);
-        $this->assertSame('https://lanyardbekasi.com/uploads/hero-cara-pemesanan-lanyard-bekasi.webp', $howTo['image']);
+        $this->assertSame('https://lanyardjogja.com/uploads/hero-cara-pemesanan-lanyard.webp', $howTo['image']);
         $this->assertCount(6, $howTo['step']);
         $this->assertSame(range(1, 6), collect($howTo['step'])->pluck('position')->all());
         $this->assertNotNull($faqSchema);
-        $this->assertSame('https://lanyardbekasi.com/cara-pemesanan', $faqSchema['url']);
+        $this->assertSame('https://lanyardjogja.com/cara-pemesanan', $faqSchema['url']);
         $this->assertCount(4, $faqSchema['mainEntity']);
         $this->assertSame(
             collect(config('seo.faq'))->pluck('question')->all(),

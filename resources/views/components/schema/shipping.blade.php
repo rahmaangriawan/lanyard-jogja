@@ -1,7 +1,7 @@
 @php
   $siteUrl = rtrim((string) config('app.url', url('/')), '/');
   if (str_contains($siteUrl, 'localhost') || str_contains($siteUrl, '127.0.0.1')) {
-    $siteUrl = 'https://lanyardbekasi.com';
+    $siteUrl = 'https://lanyardjogja.com';
   }
 
   $canonicalUrl = $siteUrl . '/pengiriman';

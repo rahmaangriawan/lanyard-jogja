@@ -138,7 +138,7 @@ class BlogArchivePageTest extends TestCase
                 'content' => '<p>Isi panduan lanyard custom untuk kebutuhan pelanggan.</p>',
                 'metaDescription' => 'Ringkasan artikel panduan lanyard '.$index.'.',
                 'published' => true,
-                'featuredImage' => '/uploads/testimoni-lanyard-bekasi.webp',
+                'featuredImage' => '/uploads/testimoni-lanyard.webp',
                 'categoryId' => $category->id,
                 'authorId' => $author->id,
                 'tags' => 'Bahan, Produksi',

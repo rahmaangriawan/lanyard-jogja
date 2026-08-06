@@ -1,4 +1,4 @@
-/* Homepage about section. Standalone to support iteration without a frontend build. */
+﻿/* Homepage about section. Standalone to support iteration without a frontend build. */
 
 .home-about,
 .home-about *,
@@ -11,7 +11,7 @@
   --about-ink: #172033;
   --about-muted: #667085;
   --about-line: #dfe4ea;
-  --about-accent: #117a3a;
+  --about-accent: var(--brand-primary);
   --about-accent-soft: #dff4e7;
   overflow: hidden;
   border-bottom: 1px solid var(--about-line);

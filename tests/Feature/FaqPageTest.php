@@ -13,7 +13,7 @@ class FaqPageTest extends TestCase
         parent::setUp();
 
         config([
-            'app.url' => 'https://lanyardbekasi.com',
+            'app.url' => 'https://lanyardjogja.com',
             'cache.public_store' => 'array',
         ]);
     }
@@ -25,14 +25,14 @@ class FaqPageTest extends TestCase
         $response
             ->assertOk()
             ->assertSee('Jawaban untuk Pertanyaan Seputar Lanyard Custom')
-            ->assertSee('Halo%20Lanyard%20Bekasi%2C%20saya%20masih%20punya%20pertanyaan%20tentang%20lanyard%20custom.', false)
+            ->assertSee('Halo%20Lanyard%20Jogja%2C%20saya%20masih%20punya%20pertanyaan%20tentang%20lanyard%20custom.', false)
             ->assertSee('href="'.route('products.index').'"', false)
             ->assertSee('href="'.route('services').'"', false)
             ->assertSee('href="'.route('shipping').'"', false)
             ->assertSee('href="'.route('warranty').'"', false)
             ->assertSee('/css/service-pages.css', false)
             ->assertSee('/css/faq-index.css', false)
-            ->assertSee('<link rel="canonical" href="https://lanyardbekasi.com/faq"', false)
+            ->assertSee('<link rel="canonical" href="https://lanyardjogja.com/faq"', false)
             ->assertDontSee('Pusat Tali Lanyard');
 
         [, $xpath] = $this->dom($response->getContent());
@@ -47,7 +47,7 @@ class FaqPageTest extends TestCase
         $this->assertSame(0, $xpath->query('//section[contains(concat(" ", normalize-space(@class), " "), " faq-category ")]//details[@open]')->length);
         $this->assertSame(
             1,
-            $xpath->query('//section[@id="faq-hero"]//img[@src="/uploads/hero-faq-lanyard-bekasi.webp" and @width="1448" and @height="1086" and @fetchpriority="high"]')->length
+            $xpath->query('//section[@id="faq-hero"]//img[@src="/uploads/hero-faq-lanyard.webp" and @width="1448" and @height="1086" and @fetchpriority="high"]')->length
         );
         $this->assertSame(
             2,
@@ -57,7 +57,7 @@ class FaqPageTest extends TestCase
             1,
             $xpath->query('//footer[@id="site-footer"]//a[@href="'.route('faq').'"]')->length
         );
-        $this->assertSame(1, $xpath->query('//footer[@id="site-footer"]//*[normalize-space(.)="Bekasi, Indonesia"]')->length);
+        $this->assertSame(1, $xpath->query('//footer[@id="site-footer"]//*[normalize-space(.)="Jogja, Indonesia"]')->length);
         $this->assertSame(0, $xpath->query('//footer[@id="site-footer"]//a[contains(normalize-space(.), "Konsultasi via WhatsApp")]')->length);
         $this->assertSame(1, $xpath->query('//a[@id="floating-whatsapp"]')->length);
 
@@ -79,9 +79,9 @@ class FaqPageTest extends TestCase
         $faqSchema = collect($schemas)->firstWhere('@type', 'FAQPage');
 
         $this->assertNotNull($breadcrumb);
-        $this->assertSame('https://lanyardbekasi.com/faq', $breadcrumb['itemListElement'][1]['item']);
+        $this->assertSame('https://lanyardjogja.com/faq', $breadcrumb['itemListElement'][1]['item']);
         $this->assertNotNull($faqSchema);
-        $this->assertSame('https://lanyardbekasi.com/faq', $faqSchema['url']);
+        $this->assertSame('https://lanyardjogja.com/faq', $faqSchema['url']);
         $this->assertCount(12, $faqSchema['mainEntity']);
 
         $expectedFaqs = collect([
