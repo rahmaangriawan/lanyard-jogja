@@ -3213,3 +3213,74 @@
     padding: 18px 20px 20px;
   }
 }
+
+/* Mobile-only homepage refinement. */
+@media (max-width: 767px) {
+  .ptl-hero {
+    padding-block: 40px;
+  }
+
+  .ptl-hero__metrics {
+    min-height: 82px;
+    padding: 8px 6px;
+  }
+
+  .ptl-hero__metrics li {
+    min-width: 0;
+    min-height: 58px;
+    gap: 6px;
+    padding-inline: 7px;
+  }
+
+  .ptl-hero__metrics .material-symbols-outlined,
+  .ptl-hero__metric-star {
+    width: 22px !important;
+    height: 22px !important;
+    flex: 0 0 22px;
+    font-size: 22px !important;
+  }
+
+  .ptl-hero__metrics strong {
+    font-size: 18px;
+  }
+
+  .ptl-hero__metrics small {
+    margin-top: 2px;
+    font-size: 12px;
+    line-height: 1.2;
+  }
+
+  .home-product-fan__category {
+    bottom: 10px;
+    left: 10px;
+    padding: 4px 8px;
+    font-size: 11px;
+    letter-spacing: 0.025em;
+  }
+
+  .home-order-process__number {
+    display: none;
+  }
+
+  .home-testimonials__note {
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  .home-testimonials__note header,
+  .home-testimonials__note blockquote {
+    position: relative;
+    z-index: 1;
+  }
+
+  .home-testimonials__quote {
+    right: 16px;
+    bottom: 14px;
+    z-index: 0;
+    color: currentColor;
+    font-size: 84px;
+    line-height: 0.72;
+    opacity: 0.14;
+    pointer-events: none;
+  }
+}
