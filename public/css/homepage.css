@@ -3220,6 +3220,37 @@
     padding-block: 40px;
   }
 
+  .home-product-fan,
+  .home-price-packages,
+  .home-order-process,
+  .home-testimonials,
+  .home-blog {
+    padding-block: 56px 60px;
+  }
+
+  .home-quotation-calculator {
+    padding-block: 56px;
+  }
+
+  .home-cta {
+    padding-block: 56px 64px;
+  }
+
+  .home-price-packages__intro,
+  .home-quotation-calculator__intro,
+  .home-order-process__intro,
+  .home-testimonials__intro {
+    margin-bottom: 24px;
+  }
+
+  .home-product-fan__header {
+    margin-bottom: 22px;
+  }
+
+  .home-blog__header {
+    margin-bottom: 20px;
+  }
+
   .ptl-hero__metrics {
     min-height: 82px;
     padding: 8px 6px;
