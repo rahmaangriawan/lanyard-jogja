@@ -1,0 +1,43 @@
+/*
+ * Public heading rhythm
+ *
+ * Keep the warm Jogja display hierarchy consistent outside the homepage:
+ * primary page titles stay readable (not extra-heavy), while section titles
+ * use the lighter editorial weight used by the homepage sections. Product
+ * and article detail pages are intentionally excluded.
+ */
+
+/* Page-level display titles (detail pages are not targeted). */
+.public-site .support-page .support-hero h1,
+.public-site .info-page .info-hero h1,
+.public-site .shipping-page .shipping-hero h1,
+.public-site .privacy-page .privacy-hero h1,
+.public-site .terms-page .terms-hero h1,
+.public-site .blog-archive-page .blog-archive-hero h1,
+.public-site .blog-archive-page .blog-author-hero h1,
+.public-site .product-index .product-index__intro h1 {
+  font-weight: 600 !important;
+}
+
+/* Primary section headings follow the homepage's lighter editorial rhythm. */
+.public-site .support-page .support-section-heading h2,
+.public-site .support-page .about-page__principles h2,
+.public-site .info-page h2[id$="-title"],
+.public-site .shipping-page h2[id$="-title"],
+.public-site .blog-archive-page h2[id$="-title"],
+.public-site .product-index h2[id$="-title"] {
+  font-weight: 400 !important;
+}
+
+/* Legal document subheads remain distinct, but lose the overly bold weight. */
+.public-site .privacy-page .privacy-section h2,
+.public-site .terms-page .terms-section h2 {
+  font-weight: 500 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .public-site h1,
+  .public-site h2 {
+    transition: none !important;
+  }
+}

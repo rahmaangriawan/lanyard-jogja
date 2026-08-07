@@ -78,6 +78,7 @@
       @yield('head')
     @endif
     @stack('head')
+    <link rel="stylesheet" href="/css/public-heading-rhythm.css?v={{ file_exists(public_path('css/public-heading-rhythm.css')) ? filemtime(public_path('css/public-heading-rhythm.css')) : 1 }}">
 
     <style>
       .bento-item { transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
