@@ -1,6 +1,11 @@
 # Historical CloudPanel Deploy Runbook (Lanyard Bekasi)
 
-> Historical reference only. The deploy workflow is intentionally disabled for this local Jogja migration; do not deploy from this checkout.
+> Historical reference only. Bekasi values below are not the active Jogja
+> deployment configuration.
+
+> Current Lanyard Jogja deployment facts, package exclusions, and log template
+> are documented in `docs/deployment-log-template.md`. The Bekasi values below
+> are not production configuration for this repository.
 
 Workflow deploy berada di `.github/workflows/deploy.yml` dan memakai repository:
 

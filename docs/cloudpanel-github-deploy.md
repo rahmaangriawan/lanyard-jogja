@@ -1,6 +1,11 @@
 # Historical CloudPanel GitHub Actions Runbook
 
-> Historical reference only. The deploy workflow is intentionally disabled for this local Jogja migration; do not deploy from this checkout.
+> Historical reference only. Bekasi values below are not the active Jogja
+> deployment configuration.
+
+> Current Lanyard Jogja deployment facts and the deployment log template are in
+> `docs/deployment-log-template.md`. Treat the historical host/domain values in
+> this file as reference only.
 
 Workflow production berada di `.github/workflows/deploy.yml`. Push ke branch
 `main` akan menjalankan test, build aset, membuat paket, mengirimnya melalui
