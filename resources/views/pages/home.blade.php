@@ -20,7 +20,6 @@
     $homeJsVersion = file_exists($homeJsPath) ? filemtime($homeJsPath) : 1;
 @endphp
 <link rel="stylesheet" href="/build/public/home.min.css?v={{ $homeCssVersion }}">
-<link rel="stylesheet" href="/css/home-quotation-calculator.css?v={{ filemtime(public_path('css/home-quotation-calculator.css')) }}">
 @endpush
 
 @push('schema')

@@ -60,7 +60,7 @@
               >
                 <img
                   src="{{ $image }}"
-                  @if ($srcset = \App\Support\ResponsiveImage::srcset($image))
+                  @if ($srcset = \App\Support\ResponsiveImage::srcset($image, [320, 640]))
                     srcset="{{ $srcset }}"
                     sizes="(min-width: 768px) 360px, 82vw"
                   @endif

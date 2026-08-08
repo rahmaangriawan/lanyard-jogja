@@ -12,19 +12,19 @@
       </li>
       <li class="home-category-strip__item">
         <a class="home-category-strip__link" href="{{ route('products.index') }}">
-          <img class="home-category-strip__image" src="/uploads/home-categories/lanyard-id-card-custom.webp" alt="Lanyard ID card custom" width="960" height="360" loading="lazy" decoding="async">
+          <img class="home-category-strip__image" src="/uploads/home-categories/lanyard-id-card-custom.webp" srcset="/uploads/home-categories/lanyard-id-card-custom-320w.webp 320w, /uploads/home-categories/lanyard-id-card-custom-480w.webp 480w, /uploads/home-categories/lanyard-id-card-custom-640w.webp 640w" sizes="(max-width: 767px) 44vw, (max-width: 1199px) 28vw, 280px" alt="Lanyard ID card custom" width="960" height="360" loading="lazy" decoding="async">
           <span class="home-category-strip__label">Lanyard ID Card Custom</span>
         </a>
       </li>
       <li class="home-category-strip__item">
         <a class="home-category-strip__link" href="{{ route('products.index') }}">
-          <img class="home-category-strip__image" src="/uploads/home-categories/cetak-lanyard-warna.webp" alt="Cetak lanyard warna" width="960" height="360" loading="lazy" decoding="async">
+          <img class="home-category-strip__image" src="/uploads/home-categories/cetak-lanyard-warna.webp" srcset="/uploads/home-categories/cetak-lanyard-warna-320w.webp 320w, /uploads/home-categories/cetak-lanyard-warna-480w.webp 480w, /uploads/home-categories/cetak-lanyard-warna-640w.webp 640w" sizes="(max-width: 767px) 44vw, (max-width: 1199px) 28vw, 280px" alt="Cetak lanyard warna" width="960" height="360" loading="lazy" decoding="async">
           <span class="home-category-strip__label">Cetak Lanyard Warna</span>
         </a>
       </li>
       <li class="home-category-strip__item">
         <a class="home-category-strip__link" href="{{ route('products.index') }}">
-          <img class="home-category-strip__image" src="/uploads/home-categories/lanyard-event.webp" alt="Lanyard untuk event" width="960" height="360" loading="lazy" decoding="async">
+          <img class="home-category-strip__image" src="/uploads/home-categories/lanyard-event.webp" srcset="/uploads/home-categories/lanyard-event-320w.webp 320w, /uploads/home-categories/lanyard-event-480w.webp 480w, /uploads/home-categories/lanyard-event-640w.webp 640w" sizes="(max-width: 767px) 44vw, (max-width: 1199px) 28vw, 280px" alt="Lanyard untuk event" width="960" height="360" loading="lazy" decoding="async">
           <span class="home-category-strip__label">Lanyard Event</span>
         </a>
       </li>

@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Storage;
 
 final class ResponsiveImage
 {
-    public static function srcset(?string $url): string
+    public static function srcset(?string $url, array $widths = [320, 640]): string
     {
         $url = AssetUrl::relative($url);
         if (! is_string($url) || $url === '') {
@@ -21,7 +21,10 @@ final class ResponsiveImage
 
         $base = substr($path, 0, -strlen($extension) - 1);
         $candidates = [];
-        foreach ([320, 640] as $width) {
+        foreach (array_values(array_unique(array_map('intval', $widths))) as $width) {
+            if ($width < 1) {
+                continue;
+            }
             $candidate = $base.'-'.$width.'w.webp';
             if (self::exists($candidate)) {
                 $candidates[] = $candidate.' '.$width.'w';

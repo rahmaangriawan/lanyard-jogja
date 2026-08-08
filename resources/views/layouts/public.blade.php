@@ -51,7 +51,9 @@
     <link rel="preload" href="/font-assets/geist-700" as="font" type="font/woff2" crossorigin>
 
     @if(request()->is('/'))
-    <link rel="preload" href="/uploads/hero-lanyard-jogja.webp" as="image" type="image/webp" fetchpriority="high">
+    <link rel="preload" href="/uploads/hero-lanyard-jogja.webp" as="image" type="image/webp" fetchpriority="high"
+      imagesrcset="/uploads/hero-lanyard-jogja-480w.webp 480w, /uploads/hero-lanyard-jogja-768w.webp 768w, /uploads/hero-lanyard-jogja-1024w.webp 1024w"
+      imagesizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 620px">
     @endif
     @if(request()->routeIs('ordering'))
     <link rel="preload" href="/uploads/hero-cara-pemesanan-lanyard.webp" as="image" type="image/webp" fetchpriority="high">
@@ -78,7 +80,6 @@
       @yield('head')
     @endif
     @stack('head')
-    <link rel="stylesheet" href="/css/public-heading-rhythm.css?v={{ file_exists(public_path('css/public-heading-rhythm.css')) ? filemtime(public_path('css/public-heading-rhythm.css')) : 1 }}">
 
     <style>
       .bento-item { transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }

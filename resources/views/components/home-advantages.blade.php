@@ -8,7 +8,7 @@
     <ol class="home-advantages__list">
       <li class="home-advantages__item">
         <div class="home-advantages__icon home-advantages__icon--asset">
-          <img src="/uploads/home-advantages/produksi-kilat.webp" alt="" width="1280" height="1280">
+          <img src="/uploads/home-advantages/produksi-kilat.webp" srcset="/uploads/home-advantages/produksi-kilat-96w.webp 96w, /uploads/home-advantages/produksi-kilat-128w.webp 128w, /uploads/home-advantages/produksi-kilat-192w.webp 192w" sizes="(max-width: 767px) 72px, 96px" alt="" width="1280" height="1280" loading="lazy" decoding="async">
         </div>
         <span class="home-advantages__number">01</span>
         <article class="home-advantages__card">
@@ -18,7 +18,7 @@
       </li>
       <li class="home-advantages__item">
         <div class="home-advantages__icon home-advantages__icon--asset">
-          <img src="/uploads/home-advantages/cetak-full-color.webp" alt="" width="1280" height="1280">
+          <img src="/uploads/home-advantages/cetak-full-color.webp" srcset="/uploads/home-advantages/cetak-full-color-96w.webp 96w, /uploads/home-advantages/cetak-full-color-128w.webp 128w, /uploads/home-advantages/cetak-full-color-192w.webp 192w" sizes="(max-width: 767px) 72px, 96px" alt="" width="1280" height="1280" loading="lazy" decoding="async">
         </div>
         <span class="home-advantages__number">02</span>
         <article class="home-advantages__card">
@@ -28,7 +28,7 @@
       </li>
       <li class="home-advantages__item">
         <div class="home-advantages__icon home-advantages__icon--asset">
-          <img src="/uploads/home-advantages/gratis-ongkir.webp" alt="" width="1280" height="1280">
+          <img src="/uploads/home-advantages/gratis-ongkir.webp" srcset="/uploads/home-advantages/gratis-ongkir-96w.webp 96w, /uploads/home-advantages/gratis-ongkir-128w.webp 128w, /uploads/home-advantages/gratis-ongkir-192w.webp 192w" sizes="(max-width: 767px) 72px, 96px" alt="" width="1280" height="1280" loading="lazy" decoding="async">
         </div>
         <span class="home-advantages__number">03</span>
         <article class="home-advantages__card">
@@ -38,7 +38,7 @@
       </li>
       <li class="home-advantages__item">
         <div class="home-advantages__icon home-advantages__icon--asset">
-          <img src="/uploads/home-advantages/garansi-kualitas.webp" alt="" width="1280" height="1280">
+          <img src="/uploads/home-advantages/garansi-kualitas.webp" srcset="/uploads/home-advantages/garansi-kualitas-96w.webp 96w, /uploads/home-advantages/garansi-kualitas-128w.webp 128w, /uploads/home-advantages/garansi-kualitas-192w.webp 192w" sizes="(max-width: 767px) 72px, 96px" alt="" width="1280" height="1280" loading="lazy" decoding="async">
         </div>
         <span class="home-advantages__number">04</span>
         <article class="home-advantages__card">

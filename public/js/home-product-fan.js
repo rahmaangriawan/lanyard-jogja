@@ -15,10 +15,22 @@
     let timer = 0;
     let pointerActive = false;
     let focusActive = false;
+    let itemOffsets = [];
+    let offsetFrame = 0;
 
     if (!stage || items.length < 2) return;
 
     const normalize = (index) => (index + items.length) % items.length;
+
+    const refreshOffsets = () => {
+      offsetFrame = 0;
+      itemOffsets = items.map((item) => item.offsetLeft);
+    };
+
+    const scheduleOffsets = () => {
+      if (offsetFrame) return;
+      offsetFrame = window.requestAnimationFrame(refreshOffsets);
+    };
 
     const setActive = (index, announce = true, scrollMobile = true) => {
       active = normalize(index);
@@ -40,7 +52,7 @@
 
       if (mobile.matches && scrollMobile) {
         const item = items[active];
-        stage.scrollTo({ left: item.offsetLeft, behavior: reducedMotion.matches ? 'auto' : 'smooth' });
+        stage.scrollTo({ left: itemOffsets[active] ?? item.offsetLeft, behavior: reducedMotion.matches ? 'auto' : 'smooth' });
       }
 
       if (announce && status) status.textContent = `Produk ${active + 1} dari ${items.length}: ${selects[active].querySelector('img').alt}`;
@@ -92,16 +104,19 @@
     });
     stage.addEventListener('scroll', () => {
       if (!mobile.matches) return;
+      if (itemOffsets.length !== items.length) refreshOffsets();
       const closest = items.reduce((selected, item, index) => (
-        Math.abs(item.offsetLeft - stage.scrollLeft) < Math.abs(items[selected].offsetLeft - stage.scrollLeft) ? index : selected
+        Math.abs(itemOffsets[index] - stage.scrollLeft) < Math.abs(itemOffsets[selected] - stage.scrollLeft) ? index : selected
       ), 0);
       if (closest !== active) setActive(closest, false, false);
     }, { passive: true });
 
     document.addEventListener('visibilitychange', start);
-    mobile.addEventListener('change', () => setActive(active, false, mobile.matches));
+    mobile.addEventListener('change', () => { refreshOffsets(); setActive(active, false, mobile.matches); });
     reducedMotion.addEventListener('change', start);
+    window.addEventListener('resize', scheduleOffsets, { passive: true });
 
+    refreshOffsets();
     setActive(0, false, false);
     start();
   };

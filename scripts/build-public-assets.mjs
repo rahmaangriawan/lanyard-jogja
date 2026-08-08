@@ -8,6 +8,7 @@ const bundles = {
   'public/build/public/site.min.css': [
     'public/css/brand-tokens.css',
     'public/css/app.min.css',
+    'public/css/public-heading-rhythm.css',
     'public/vendor/scroll/scroll-reveal.css',
     'public/css/header.css',
     'public/css/footer.css',
@@ -16,6 +17,7 @@ const bundles = {
   ],
   'public/build/public/home.min.css': [
     'public/css/homepage.css',
+    'public/css/home-quotation-calculator.css',
   ],
   'public/build/public/site.min.js': [
     'public/js/public-site.js',

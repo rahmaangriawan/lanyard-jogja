@@ -41,6 +41,8 @@
       <img
         class="ptl-hero__image"
         src="/uploads/hero-lanyard-jogja.webp"
+        srcset="/uploads/hero-lanyard-jogja-480w.webp 480w, /uploads/hero-lanyard-jogja-768w.webp 768w, /uploads/hero-lanyard-jogja-1024w.webp 1024w"
+        sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 620px"
         alt="Koleksi lanyard custom bertema Jogja dengan ID card dan aksesori"
         width="1448"
         height="1086"

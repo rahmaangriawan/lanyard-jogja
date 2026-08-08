@@ -13,7 +13,9 @@
       track.append(copy);
     };
 
+    let measureFrame = 0;
     const measure = () => {
+      measureFrame = 0;
       const gap = Number.parseFloat(getComputedStyle(track).gap) || 0;
       const distance = group.getBoundingClientRect().width + gap;
 
@@ -23,8 +25,13 @@
       marquee.style.setProperty('--home-marquee-duration', `${Math.max(18, distance / 54)}s`);
     };
 
-    measure();
-    new ResizeObserver(measure).observe(marquee);
+    const scheduleMeasure = () => {
+      if (measureFrame) return;
+      measureFrame = window.requestAnimationFrame(measure);
+    };
+
+    scheduleMeasure();
+    new ResizeObserver(scheduleMeasure).observe(marquee);
   };
 
   const initialize = () => document.querySelectorAll('[data-home-marquee]').forEach(setupMarquee);
